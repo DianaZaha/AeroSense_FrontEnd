@@ -1,0 +1,642 @@
+.home-page {
+    background-color: #509c19;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    width: 100%;
+  }
+  
+  .home-page .div {
+    background-color: var(--leafgreen);
+    height: 5006px;
+    overflow: hidden;
+    position: relative;
+    width: 1920px;
+  }
+  
+  .home-page .bottom-info {
+    height: 416px;
+    left: 0;
+    position: absolute;
+    top: 4592px;
+    width: 1934px;
+  }
+  
+  .home-page .overlap-group {
+    background-color: #f4f4f4;
+    height: 416px;
+    position: relative;
+    width: 1920px;
+  }
+  
+  .home-page .text-wrapper {
+    color: #000000;
+    font-family: "Jura SemiBold", Helvetica;
+    font-size: 40px;
+    font-weight: 800;
+    left: 485px;
+    letter-spacing: 0;
+    line-height: normal;
+    position: absolute;
+    text-align: center;
+    top: 71px;
+  }
+  
+  .home-page .text-wrapper-2 {
+    color: #000000;
+    font-family: "Jura SemiBold", Helvetica;
+    font-size: 40px;
+    font-weight: 800;
+    left: 1293px;
+    letter-spacing: 0;
+    line-height: normal;
+    position: absolute;
+    text-align: center;
+    top: 71px;
+  }
+  
+  .home-page .text-wrapper-3 {
+    color: #000000;
+    font-family: "Jura Light", Helvetica;
+    font-size: 40px;
+    font-weight: 300;
+    left: 485px;
+    letter-spacing: 0;
+    line-height: normal;
+    position: absolute;
+    text-align: center;
+    top: 168px;
+  }
+  
+  .home-page .terms-conditions {
+    color: #000000;
+    font-family: "Jura Light", Helvetica;
+    font-size: 40px;
+    font-weight: 300;
+    left: 1295px;
+    letter-spacing: 0;
+    line-height: normal;
+    position: absolute;
+    text-align: center;
+    top: 168px;
+  }
+  
+  .home-page .text-wrapper-4 {
+    color: #000000;
+    font-family: "Jura Light", Helvetica;
+    font-size: 40px;
+    font-weight: 300;
+    left: 485px;
+    letter-spacing: 0;
+    line-height: normal;
+    position: absolute;
+    text-align: center;
+    top: 226px;
+  }
+  
+  .home-page .text-wrapper-5 {
+    color: #000000;
+    font-family: "Jura Light", Helvetica;
+    font-size: 40px;
+    font-weight: 300;
+    left: 1295px;
+    letter-spacing: 0;
+    line-height: normal;
+    position: absolute;
+    text-align: center;
+    top: 226px;
+  }
+  
+  .home-page .text-wrapper-6 {
+    color: #000000;
+    font-family: "Jura Light", Helvetica;
+    font-size: 40px;
+    font-weight: 300;
+    left: 485px;
+    letter-spacing: 0;
+    line-height: normal;
+    position: absolute;
+    text-align: center;
+    top: 286px;
+  }
+  
+  .home-page .green-break-QR {
+    height: 416px;
+    left: 0;
+    position: absolute;
+    top: 4174px;
+    width: 1922px;
+  }
+  
+  .home-page .overlap {
+    background-color: #509c19;
+    height: 416px;
+    position: relative;
+    width: 1920px;
+  }
+  
+  .home-page .don-t-lose-touch {
+    color: #f4f4f4;
+    font-family: "Jura SemiBold", Helvetica;
+    font-size: 30px;
+    font-weight: 400;
+    left: 404px;
+    letter-spacing: 0;
+    line-height: normal;
+    position: absolute;
+    text-align: center;
+    top: 300px;
+    width: 1111px;
+  }
+  
+  .home-page .span {
+    font-weight: 500;
+  }
+  
+  .home-page .text-wrapper-7 {
+    font-family: "Jura SemiBold", Helvetica;
+    font-size: 31px;
+    font-weight: 700;
+  }
+  
+  .home-page .aerosensor-QR {
+    height: 264px;
+    left: 823px;
+    object-fit: cover;
+    position: absolute;
+    top: 30px;
+    width: 273px;
+  }
+  
+  .home-page .element-white-box-wrapper {
+    background-color: #f4f4f4;
+    height: 886px;
+    left: 0;
+    position: absolute;
+    top: 1514px;
+    width: 1920px;
+  }
+  
+  .home-page .element-white-box {
+    height: 661px;
+    left: 64px;
+    position: relative;
+    top: 85px;
+    width: 1734px;
+  }
+  
+  .home-page .pngwing {
+    height: 661px;
+    left: 0;
+    object-fit: cover;
+    position: absolute;
+    top: 0;
+    width: 896px;
+  }
+  
+  .home-page .p {
+    color: #000000;
+    font-family: "Jura SemiBold", Helvetica;
+    font-size: 48px;
+    font-weight: 700;
+    left: 970px;
+    letter-spacing: 0;
+    line-height: normal;
+    position: absolute;
+    top: 65px;
+    width: 662px;
+  }
+  
+  .home-page .div-wrapper {
+    background-color: #c2e383c9;
+    border-radius: 39px;
+    height: 109px;
+    left: 973px;
+    position: absolute;
+    top: 501px;
+    width: 317px;
+  }
+  
+  .home-page .text-wrapper-8 {
+    color: #000000;
+    font-family: "Jura SemiBold", Helvetica;
+    font-size: 36px;
+    font-weight: 700;
+    left: 56px;
+    letter-spacing: 0;
+    line-height: normal;
+    position: absolute;
+    text-align: center;
+    top: 33px;
+    white-space: nowrap;
+  }
+  
+  .home-page .text-wrapper-9 {
+    color: #000000;
+    font-family: "Jura Light", Helvetica;
+    font-size: 36px;
+    font-weight: 300;
+    left: 973px;
+    letter-spacing: 0;
+    line-height: normal;
+    position: absolute;
+    top: 274px;
+    width: 755px;
+  }
+  
+  .home-page .overlap-2 {
+    height: 1732px;
+    left: -616px;
+    position: absolute;
+    top: -218px;
+    width: 4069px;
+  }
+  
+  .home-page .rectangle {
+    background: linear-gradient(180deg, rgb(244.37, 244.37, 244.37) 0%, rgba(80, 156, 25, 0) 100%);
+    height: 886px;
+    left: 616px;
+    position: absolute;
+    top: 846px;
+    width: 1920px;
+  }
+  
+  .home-page .element-green-box {
+    height: 625px;
+    left: 778px;
+    position: absolute;
+    top: 977px;
+    width: 1602px;
+  }
+  
+  .home-page .text-wrapper-10 {
+    color: #000000;
+    font-family: "Jura SemiBold", Helvetica;
+    font-size: 48px;
+    font-weight: 700;
+    left: 0;
+    letter-spacing: 0;
+    line-height: normal;
+    position: absolute;
+    top: 56px;
+    width: 662px;
+  }
+  
+  .home-page .overlap-3 {
+    background-color: #c2e383c9;
+    border-radius: 39px;
+    height: 109px;
+    left: 0;
+    position: absolute;
+    top: 470px;
+    width: 317px;
+  }
+  
+  .home-page .text-wrapper-11 {
+    color: #000000;
+    font-family: "Jura SemiBold", Helvetica;
+    font-size: 36px;
+    font-weight: 700;
+    left: 36px;
+    letter-spacing: 0;
+    line-height: normal;
+    position: absolute;
+    text-align: center;
+    top: 33px;
+    white-space: nowrap;
+  }
+  
+  .home-page .text-wrapper-12 {
+    color: #000000;
+    font-family: "Jura Light", Helvetica;
+    font-size: 36px;
+    font-weight: 300;
+    left: 0;
+    letter-spacing: 0;
+    line-height: normal;
+    position: absolute;
+    top: 226px;
+    width: 755px;
+  }
+  
+  .home-page .brain-icon {
+    height: 625px;
+    left: 946px;
+    object-fit: cover;
+    position: absolute;
+    top: 0;
+    width: 650px;
+  }
+  
+  .home-page .top-box {
+    height: 1713px;
+    left: 0;
+    position: absolute;
+    top: 0;
+    width: 4069px;
+  }
+  
+  .home-page .overlap-4 {
+    height: 1495px;
+    left: 616px;
+    position: relative;
+    top: 218px;
+    width: 1920px;
+  }
+  
+  .home-page .header {
+    background-color: #f4f4f4;
+    height: 523px;
+    left: 0;
+    position: absolute;
+    top: 109px;
+    width: 1920px;
+  }
+  
+  .home-page .painted-leaf-r {
+    height: 1495px;
+    left: 1374px;
+    object-fit: cover;
+    position: absolute;
+    top: 0;
+    width: 546px;
+  }
+  
+  .home-page .painted-leaf-l {
+    height: 1143px;
+    left: 0;
+    object-fit: cover;
+    position: absolute;
+    top: 0;
+    width: 616px;
+  }
+  
+  .home-page .green-leaves-logo {
+    height: 301px;
+    left: 824px;
+    object-fit: cover;
+    position: absolute;
+    top: 94px;
+    width: 312px;
+  }
+  
+  .home-page .text-wrapper-13 {
+    -webkit-text-stroke: 1px #000000;
+    color: #000000;
+    font-family: "Jura Regular", Helvetica;
+    font-size: 90px;
+    font-weight: 400;
+    left: 679px;
+    letter-spacing: 0;
+    line-height: normal;
+    position: absolute;
+    text-align: center;
+    top: 369px;
+    white-space: nowrap;
+    width: 600px;
+  }
+  
+  .home-page .down-arrow {
+    height: 94px;
+    left: 914px;
+    object-fit: cover;
+    position: absolute;
+    top: 533px;
+    width: 91px;
+  }
+  
+  .home-page .text-wrapper-14 {
+    color: #000000;
+    font-family: "Jura Regular", Helvetica;
+    font-size: 40px;
+    font-weight: 400;
+    left: 462px;
+    letter-spacing: 0;
+    line-height: normal;
+    position: absolute;
+    text-align: center;
+    top: 485px;
+    width: 996px;
+  }
+  
+  .home-page .top-border-page {
+    height: 110px;
+    left: 616px;
+    position: absolute;
+    top: 218px;
+    width: 1924px;
+  }
+  
+  .home-page .overlap-5 {
+    background-color: var(--lightgreybg);
+    height: 110px;
+    position: relative;
+    width: 1920px;
+  }
+  
+  .home-page .text-wrapper-15 {
+    color: #000000;
+    font-family: "Jura Regular", Helvetica;
+    font-size: 35px;
+    font-weight: 400;
+    left: 162px;
+    letter-spacing: 0;
+    line-height: normal;
+    position: absolute;
+    text-align: center;
+    top: 28px;
+    width: 141px;
+  }
+  
+  .home-page .text-wrapper-16 {
+    color: #000000;
+    font-family: "Jura Regular", Helvetica;
+    font-size: 35px;
+    font-weight: 400;
+    left: 324px;
+    letter-spacing: 0;
+    line-height: normal;
+    position: absolute;
+    text-align: center;
+    top: 28px;
+    width: 141px;
+  }
+  
+  .home-page .user-icon {
+    height: 58px;
+    left: 1657px;
+    object-fit: cover;
+    position: absolute;
+    top: 25px;
+    width: 59px;
+  }
+  
+  .home-page .overlap-6 {
+    background-color: #f4f4f4;
+    height: 886px;
+    left: 0;
+    position: absolute;
+    top: 3286px;
+    width: 1920px;
+  }
+  
+  .home-page .element-white-box-2 {
+    height: 620px;
+    left: 40px;
+    position: relative;
+    top: 134px;
+    width: 1760px;
+  }
+  
+  .home-page .aerosense-premium {
+    color: #000000;
+    font-family: "Jura Regular", Helvetica;
+    font-size: 36px;
+    font-weight: 400;
+    left: 997px;
+    letter-spacing: 0;
+    line-height: normal;
+    position: absolute;
+    top: 13px;
+    width: 600px;
+  }
+  
+  .home-page .people {
+    height: 620px;
+    left: 0;
+    object-fit: cover;
+    position: absolute;
+    top: 0;
+    width: 983px;
+  }
+  
+  .home-page .text-wrapper-17 {
+    color: #000000;
+    font-family: "Jura SemiBold", Helvetica;
+    font-size: 48px;
+    font-weight: 700;
+    left: 997px;
+    letter-spacing: 0;
+    line-height: normal;
+    position: absolute;
+    top: 102px;
+    width: 662px;
+  }
+  
+  .home-page .overlap-7 {
+    background-color: #c2e383c9;
+    border-radius: 39px;
+    height: 109px;
+    left: 997px;
+    position: absolute;
+    top: 498px;
+    width: 317px;
+  }
+  
+  .home-page .text-wrapper-18 {
+    color: #000000;
+    font-family: "Jura SemiBold", Helvetica;
+    font-size: 36px;
+    font-weight: 700;
+    left: 50px;
+    letter-spacing: 0;
+    line-height: normal;
+    position: absolute;
+    text-align: center;
+    top: 33px;
+    white-space: nowrap;
+  }
+  
+  .home-page .text-wrapper-19 {
+    color: #000000;
+    font-family: "Jura Light", Helvetica;
+    font-size: 36px;
+    font-weight: 300;
+    left: 997px;
+    letter-spacing: 0;
+    line-height: normal;
+    position: absolute;
+    top: 271px;
+    width: 755px;
+  }
+  
+  .home-page .element-green-box-wrapper {
+    background-color: #509c19;
+    height: 886px;
+    left: 0;
+    position: absolute;
+    top: 2400px;
+    width: 1920px;
+  }
+  
+  .home-page .element-green-box-2 {
+    height: 598px;
+    left: 162px;
+    position: relative;
+    top: 140px;
+    width: 1636px;
+  }
+  
+  .home-page .img {
+    height: 591px;
+    left: 980px;
+    object-fit: cover;
+    position: absolute;
+    top: 7px;
+    width: 650px;
+  }
+  
+  .home-page .MEASURE-THE-HEALTH {
+    color: transparent;
+    font-family: "Jura SemiBold", Helvetica;
+    font-size: 48px;
+    font-weight: 700;
+    left: 0;
+    letter-spacing: 0;
+    line-height: normal;
+    position: absolute;
+    top: 0;
+    width: 662px;
+  }
+  
+  .home-page .text-wrapper-20 {
+    color: #000000;
+  }
+  
+  .home-page .find-out-more-wrapper {
+    background-color: #c2e383c9;
+    border-radius: 39px;
+    height: 109px;
+    left: 0;
+    position: absolute;
+    top: 452px;
+    width: 317px;
+  }
+  
+  .home-page .find-out-more {
+    color: #000000;
+    font-family: "Jura SemiBold", Helvetica;
+    font-size: 36px;
+    font-weight: 700;
+    left: 31px;
+    letter-spacing: 0;
+    line-height: normal;
+    position: absolute;
+    text-align: center;
+    top: 33px;
+    white-space: nowrap;
+  }
+  
+  .home-page .text-wrapper-21 {
+    color: #000000;
+    font-family: "Jura Light", Helvetica;
+    font-size: 36px;
+    font-weight: 300;
+    left: 0;
+    letter-spacing: 0;
+    line-height: normal;
+    position: absolute;
+    top: 214px;
+    width: 711px;
+  }
+  

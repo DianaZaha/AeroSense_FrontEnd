@@ -1,25 +1,22 @@
-import logo from './logo.svg';
-import './App.css';
+import React from 'react';
+import SensorReading from './SensorReading';
+import HomePage from './HomePageComponent/HomePage';
+import CreateAccount from './CreateAccountPageComponent/CreateAccount';
+import { useState } from 'react';
 
 function App() {
+  const [values, setValues] = useState([90.5, 100.4, 95.6, 98.7]);
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+    <>
+      {/*
+         <HomePage />
+        <SensorReading reading={values}/>
+      */}
+      <CreateAccount />
+      
+      
+    </>
+  )
 }
 
 export default App;
