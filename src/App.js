@@ -2,6 +2,7 @@ import React from 'react';
 import SensorReading from './SensorReading';
 import HomePage from './HomePageComponent/HomePage';
 import CreateAccount from './CreateAccountPageComponent/CreateAccount';
+import HomePageUserAccount from './HomePageUserAccount/HomePageUserAccount';
 import { useState } from 'react';
 
 function App() {
@@ -10,10 +11,11 @@ function App() {
     <>
       {/*
          <HomePage />
+         <CreateAccount />
         <SensorReading reading={values}/>
       */}
-      <CreateAccount />
       
+      <HomePageUserAccount />
       
     </>
   )
