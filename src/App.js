@@ -11,11 +11,12 @@ function App() {
     <>
       {/*
          <HomePage />
-         <CreateAccount />
+         <HomePageUserAccount />
+         
         <SensorReading reading={values}/>
       */}
       
-      <HomePageUserAccount />
+      <CreateAccount />
       
     </>
   )
