@@ -9,6 +9,7 @@ import UserSensorStatistics from './UserSensorStatistics/UserSensorStatistics';
 import {Box, Container, CssBaseline, createTheme} from '@mui/material'
 import { ThemeProvider } from '@emotion/react';
 import SideBarComponent from './Diana/SensorHomePage/SideBarComponent/SideBarComponent';
+import SensorHomePage from './Diana/SensorHomePage/SensorHomePage';
 
 const mdTheme = createTheme();
 
@@ -24,10 +25,11 @@ function App() {
             <Route exact={true} path="/user" element={<HomePageUserAccount/>}/>
             <Route exact={true} path="/create" element={<CreateAccount/>}/>
             <Route exact={true} path="/sensor" element={<UserSensorStatistics/>}/>
+            <Route exact={true} path="/sensors" element={<SensorHomePage/>}/>
           </Routes>
         </Container>
       </Box>
-      <SideBarComponent/>
+      
     </ThemeProvider>
   )
 }
