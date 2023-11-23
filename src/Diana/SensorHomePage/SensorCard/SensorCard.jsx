@@ -6,8 +6,28 @@ import CardContent from '@mui/material/CardContent';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import SensorsIcon from '@mui/icons-material/Sensors';
+import Modal from '@mui/material/Modal';
+import RoutineDetails from '../../../Crista/components/RoutineDetails';
 
-export default function SensorCard({Name}) {
+export default function SensorCard({ Name }) {
+
+  const [open, setOpen] = React.useState(false);
+  const handleOpen = () => setOpen(true);
+  const handleClose = () => setOpen(false);
+
+  const style = {
+    position: 'absolute',
+    top: '50%',
+    left: '50%',
+    transform: 'translate(-50%, -50%)',
+    width: 400,
+    bgcolor: 'background.paper',
+    border: '2px solid #000',
+    boxShadow: 24,
+    p: 4,
+  };
+
+
   return (
     <Card sx={{ minWidth: 275 }}>
       <CardContent>
@@ -17,7 +37,17 @@ export default function SensorCard({Name}) {
         <SensorsIcon></SensorsIcon>
       </CardContent>
       <CardActions>
-        <Button size="small">Sensor Details</Button>
+        <Button size="small" onClick={handleOpen}>Sensor Details</Button>
+        <Modal
+          open={open}
+          onClose={handleClose}
+          aria-labelledby="modal-modal-title"
+          aria-describedby="modal-modal-description"
+        >
+           <Box sx={style}>
+          <Typography variant='h6'>Here would come Sensor Details</Typography>
+          </Box>
+        </Modal>
       </CardActions>
     </Card>
   );
