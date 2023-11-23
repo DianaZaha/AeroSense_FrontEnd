@@ -29,6 +29,7 @@ function App() {
               <Route exact={true} path="/user" element={<HomePageUserAccount/>}/>
               <Route exact={true} path="/create" element={<CreateAccount/>}/>
               <Route exact={true} path="/sensor" element={<UserSensorStatistics/>}/>
+              <Route exact={true} path="/sensors" element={<SensorHomePage/>}/>
               <Route exact={true} path='/routines' element={<RoutinesPage/>}/>
             </Routes>
           </Container>
