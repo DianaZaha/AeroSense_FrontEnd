@@ -90,7 +90,7 @@ const Drawer = styled(MuiDrawer, { shouldForwardProp: (prop) => prop !== 'open' 
   }),
 );
 
-export default function SideBarComponent() {
+export default function SideBarComponent({ children }) {
   const theme = useTheme();
   const [open, setOpen] = React.useState(false);
 
@@ -193,7 +193,7 @@ export default function SideBarComponent() {
         </List>
         <Divider />
         <List>
-        <ListItem key={"AccountPage"} disablePadding sx={{ display: 'block' }}>
+          <ListItem key={"AccountPage"} disablePadding sx={{ display: 'block' }}>
             <ListItemButton
               sx={{
                 minHeight: 48,
@@ -233,12 +233,11 @@ export default function SideBarComponent() {
               <ListItemText primary={"Settings"} sx={{ opacity: open ? 1 : 0 }} />
             </ListItemButton>
           </ListItem>
-
         </List>
       </Drawer>
       <Box component="main" sx={{ flexGrow: 1, p: 3 }}>
-        <DrawerHeader />
-
+        <Toolbar />
+        { children }
       </Box>
     </Box>
   );
