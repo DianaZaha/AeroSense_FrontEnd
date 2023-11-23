@@ -8,6 +8,7 @@ import { Routes, Route } from 'react-router-dom';
 import UserSensorStatistics from './UserSensorStatistics/UserSensorStatistics';
 import {Box, Container, CssBaseline, createTheme} from '@mui/material'
 import { ThemeProvider } from '@emotion/react';
+import SideBarComponent from './Diana/SensorHomePage/SideBarComponent/SideBarComponent';
 
 const mdTheme = createTheme();
 
@@ -26,6 +27,7 @@ function App() {
           </Routes>
         </Container>
       </Box>
+      <SideBarComponent/>
     </ThemeProvider>
   )
 }

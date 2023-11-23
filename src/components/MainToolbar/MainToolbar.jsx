@@ -16,7 +16,7 @@ import { Spa } from '@mui/icons-material';
 const pages = ['Products', 'Pricing', 'Blog'];
 const settings = ['Profile', 'Account', 'Dashboard', 'Logout']; 
 
-export default function HomePage() {
+export default function MainToolbar() {
   const [anchorElNav, setAnchorElNav] = React.useState(null);
   const [anchorElUser, setAnchorElUser] = React.useState(null);
 
@@ -37,9 +37,9 @@ export default function HomePage() {
 
   return (
     <>
-      <AppBar position="static">
+      <AppBar position="fixed" >
       <Container maxWidth="xl">
-        <Toolbar disableGutters>
+        <Toolbar disableGutters style={{background:"#228B22"}}>
           <Spa sx={{ display: { xs: 'none', md: 'flex' }, mr: 1 }} />
           <Typography
             variant="h6"
