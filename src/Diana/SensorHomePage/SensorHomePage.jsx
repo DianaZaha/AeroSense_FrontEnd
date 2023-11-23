@@ -14,13 +14,13 @@ const RoomList = [
 export default function SensorHomePage() {
     return (
         <>
-        <Box sx={{ display: 'flex' }}>
+        {/* <Box sx={{ display: 'flex' }}>
             <CssBaseline />
             <Container maxWidth='xl'>
                 <SideBarComponent />
             </Container>
-        </Box>
-        <Box sx={{ paddingX:'10%', width: '100%' }}>
+        </Box> */}
+        <Box sx={{ padding:'2%', width: '100%' }}>
             <Typography variant="h3" gutterBottom>
                 Your Building/Rooms with Sensors:
             </Typography>
