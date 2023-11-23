@@ -10,6 +10,11 @@ import {Box, Container, CssBaseline, createTheme} from '@mui/material'
 import { ThemeProvider } from '@emotion/react';
 import SideBarComponent from './Diana/SensorHomePage/SideBarComponent/SideBarComponent';
 import { RoutinesPage } from './RoutinesPage/RoutinesPage';
+import MainToolbar from './components/MainToolbar/MainToolbar';
+import RoutineDetails from './Crista/components/RoutineDetails';
+import AddCard from './Diana/SensorHomePage/AddCard/AddCard';
+import RoomCard from './Diana/SensorHomePage/RoomCard/RoomCard';
+import SensorHomePage from './Diana/SensorHomePage/SensorHomePage';
 
 const mdTheme = createTheme();
 
