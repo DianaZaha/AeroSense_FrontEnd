@@ -33,7 +33,7 @@ function App() {
               <Route exact={true} path='/routines' element={<RoutinesPage/>}/>
             </Routes>
           </Container>
-        </SideBarComponent>
+        </SideBarComponent> 
     </ThemeProvider>
   )
 }
