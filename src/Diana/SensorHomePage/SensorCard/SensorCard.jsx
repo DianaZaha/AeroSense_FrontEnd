@@ -7,7 +7,7 @@ import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import SensorsIcon from '@mui/icons-material/Sensors';
 import Modal from '@mui/material/Modal';
-import RoutineDetails from '../../../Crista/components/RoutineDetails';
+import SensorDetailsComponent from '../../SensorDetailsComponent/SensorDetailsComponent';
 
 export default function SensorCard({ Name }) {
 
@@ -45,7 +45,7 @@ export default function SensorCard({ Name }) {
           aria-describedby="modal-modal-description"
         >
            <Box sx={style}>
-          <Typography variant='h6'>Here would come Sensor Details</Typography>
+           <SensorDetailsComponent SensorName={Name} />
           </Box>
         </Modal>
       </CardActions>
