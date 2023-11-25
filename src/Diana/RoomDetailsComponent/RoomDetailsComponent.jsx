@@ -34,8 +34,8 @@ export default function RoomDetailsComponent({ RoomName, RoomDetailsDescription,
                     </Typography>
                     <List>
                     {RoomSensorList.map(element => (
-                        <ListItem>
-                            <Box > <Typography> {element} </Typography> </Box>
+                        <ListItem key={element.id_machine}>
+                            <Box > <Typography> {element.id_machine} {element.name} </Typography> </Box>
                         </ListItem>
                     ))
                     }
