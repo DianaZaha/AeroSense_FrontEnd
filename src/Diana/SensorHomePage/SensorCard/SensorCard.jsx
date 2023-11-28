@@ -9,7 +9,7 @@ import SensorsIcon from '@mui/icons-material/Sensors';
 import Modal from '@mui/material/Modal';
 import SensorDetailsComponent from '../../SensorDetailsComponent/SensorDetailsComponent';
 
-export default function SensorCard({ Name }) {
+export default function SensorCard({ Name, Id}) {
 
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => setOpen(true);
@@ -27,12 +27,12 @@ export default function SensorCard({ Name }) {
     p: 4,
   };
 
-
   return (
     <Card sx={{ minWidth: 275 }}>
       <CardContent>
         <Typography sx={{ fontSize: 14 }} color="text.secondary" gutterBottom>
-          Sensor's Name: {Name}
+          Sensor's Name: {Name} <br />
+          ID: {Id}
         </Typography>
         <SensorsIcon></SensorsIcon>
       </CardContent>
@@ -45,7 +45,7 @@ export default function SensorCard({ Name }) {
           aria-describedby="modal-modal-description"
         >
            <Box sx={style}>
-           <SensorDetailsComponent SensorName={Name} />
+           <SensorDetailsComponent SensorName={Name} ID={Id} />
           </Box>
         </Modal>
       </CardActions>
