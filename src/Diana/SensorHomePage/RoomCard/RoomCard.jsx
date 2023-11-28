@@ -7,6 +7,7 @@ import Typography from '@mui/material/Typography';
 import SensorCard from '../SensorCard/SensorCard';
 import { Box, Modal } from '@mui/material';
 import RoomDetailsComponent from '../../RoomDetailsComponent/RoomDetailsComponent';
+import { Error } from '@mui/icons-material';
 
 export default function RoomCard({ supabase, Name, Description, RoomId, setDeleteAlerState, fetchRooms}) {
   const [detailsOpen, setDetailsOpen] = useState(false);
@@ -21,14 +22,12 @@ export default function RoomCard({ supabase, Name, Description, RoomId, setDelet
     bgcolor: 'background.paper', boxShadow: 24, p: 4,
   };
 
+  async function fetchMachines() {
+    const { data } = await supabase.from('machine_group').select('machine( * )').eq('id_machine_group', RoomId);
+    setSensorList(data[0].machine); 
+  }
+
   const getSensorList = useCallback(() => {
-    async function fetchMachines() {
-      const { data: FetchedIDs } = await supabase.from('machine_machine_group').select('id_machine').eq('id_machine_group', RoomId);
-      var IDs =[];
-      FetchedIDs.forEach(element=>IDs.push(element.id_machine));
-      const { data: FetchesMachines } = await supabase.from('machine').select('*').in('id_machine', IDs);
-      setSensorList(FetchesMachines);
-    }
     fetchMachines();
   }, []);
 

@@ -1,13 +1,10 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import { Box, IconButton, Fab, Modal, Typography, Container, Alert, Snackbar } from '@mui/material'
 import AddIcon from '@mui/icons-material/Add';
-import { createClient } from '@supabase/supabase-js'
 import RoomCard from './RoomCard/RoomCard';
 import AddRoomComponent from '../AddRoomComponent/AddRoomComponent';
 import AlertAddRoom from '../AddRoomComponent/AlertAddRoom'
 import AlertDeleteRoom from '../RoomDetailsComponent/AlertDeleteRoom';
-
-const supabase = createClient("https://qniuxbcurrnrzyptvfej.supabase.co/", "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InFuaXV4YmN1cnJucnp5cHR2ZmVqIiwicm9sZSI6ImFub24iLCJpYXQiOjE3MDA5MjEyOTIsImV4cCI6MjAxNjQ5NzI5Mn0.m19rQ75BCpl_6iX-unkW3keao72D4po1olxds1YKeNo");
 
 const style = {
     position: 'absolute',
@@ -20,7 +17,7 @@ const style = {
     p: 4,
 };
 
-export default function SensorHomePage() {
+export default function SensorHomePage({supabase}) {
     const [Rooms, setRooms] = useState([]);
     const [preRender, setPrerender] = useState(0);
     const [openNewRoom, setOpenNewRoom] = useState(false);
@@ -51,7 +48,7 @@ export default function SensorHomePage() {
         setOpenSnackBar(value);
     }, []);
 
-    if (preRender == 0) {
+    if (preRender === 0) {
         setAlerState('');
         setPrerender(1);
         setOpenSnackBar(false);

@@ -134,6 +134,7 @@ export default function SideBarComponent({ children }) {
                 justifyContent: open ? 'initial' : 'center',
                 px: 2.5,
               }}
+              href='/sensors'
             >
               <ListItemIcon
                 sx={{
@@ -154,6 +155,7 @@ export default function SideBarComponent({ children }) {
                 justifyContent: open ? 'initial' : 'center',
                 px: 2.5,
               }}
+              href='/routines'
             >
               <ListItemIcon
                 sx={{
