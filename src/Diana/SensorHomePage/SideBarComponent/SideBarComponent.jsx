@@ -1,5 +1,9 @@
 import * as React from 'react';
 import { styled, useTheme } from '@mui/material/styles';
+import {
+  Link as RouterLink,
+  LinkProps as RouterLinkProps,
+} from 'react-router-dom';
 import Box from '@mui/material/Box';
 import MuiDrawer from '@mui/material/Drawer';
 import MuiAppBar from '@mui/material/AppBar';
@@ -89,6 +93,13 @@ const Drawer = styled(MuiDrawer, { shouldForwardProp: (prop) => prop !== 'open' 
 );
 
 export default function SideBarComponent({ children }) {
+  const Link = React.forwardRef(function Link(
+    itemProps,
+    ref,
+  ) {
+    return <RouterLink ref={ref} {...itemProps} role={undefined} />;
+  });
+
   const theme = useTheme();
   const [open, setOpen] = React.useState(false);
 
@@ -127,14 +138,13 @@ export default function SideBarComponent({ children }) {
         </DrawerHeader>
         <Divider />
         <List>
-          <ListItem key={"SensorsPage"} disablePadding sx={{ display: 'block' }}>
+          <ListItem key={"SensorsPage"} disablePadding sx={{ display: 'block' }} component={Link} to={'/sensors'}>
             <ListItemButton
               sx={{
                 minHeight: 48,
                 justifyContent: open ? 'initial' : 'center',
                 px: 2.5,
               }}
-              href='/sensors'
             >
               <ListItemIcon
                 sx={{
@@ -148,14 +158,13 @@ export default function SideBarComponent({ children }) {
               <ListItemText primary={"Sensors"} sx={{ opacity: open ? 1 : 0 }} />
             </ListItemButton>
           </ListItem>
-          <ListItem key={"RoutinePage"} disablePadding sx={{ display: 'block' }}>
+          <ListItem key={"RoutinePage"} disablePadding sx={{ display: 'block' }} component={Link} to={'/routines'}>
             <ListItemButton
               sx={{
                 minHeight: 48,
                 justifyContent: open ? 'initial' : 'center',
                 px: 2.5,
               }}
-              href='/routines'
             >
               <ListItemIcon
                 sx={{
@@ -169,7 +178,7 @@ export default function SideBarComponent({ children }) {
               <ListItemText primary={"Routines"} sx={{ opacity: open ? 1 : 0 }} />
             </ListItemButton>
           </ListItem>
-          <ListItem key={"StatisticsPage"} disablePadding sx={{ display: 'block' }}>
+          <ListItem key={"StatisticsPage"} disablePadding sx={{ display: 'block' }} component={Link} to={'/statistics'}>
             <ListItemButton
               sx={{
                 minHeight: 48,
@@ -189,11 +198,10 @@ export default function SideBarComponent({ children }) {
               <ListItemText primary={"Overall Statistics"} sx={{ opacity: open ? 1 : 0 }} />
             </ListItemButton>
           </ListItem>
-
         </List>
         <Divider />
         <List>
-          <ListItem key={"AccountPage"} disablePadding sx={{ display: 'block' }}>
+          <ListItem key={"AccountPage"} disablePadding sx={{ display: 'block' }} component={Link} to={'/user'}>
             <ListItemButton
               sx={{
                 minHeight: 48,
@@ -213,7 +221,7 @@ export default function SideBarComponent({ children }) {
               <ListItemText primary={"Account"} sx={{ opacity: open ? 1 : 0 }} />
             </ListItemButton>
           </ListItem>
-          <ListItem key={"SettingsPage"} disablePadding sx={{ display: 'block' }}>
+          <ListItem key={"SettingsPage"} disablePadding sx={{ display: 'block' }} component={Link} to={'/settings'}>
             <ListItemButton
               sx={{
                 minHeight: 48,
