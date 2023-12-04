@@ -5,9 +5,9 @@ import CardContent from '@mui/material/CardContent';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import SensorCard from '../SensorCard/SensorCard';
-import { Box, Modal } from '@mui/material';
+import { Box, Modal, Fab} from '@mui/material';
+import AddIcon from '@mui/icons-material/Add';
 import RoomDetailsComponent from '../../RoomDetailsComponent/RoomDetailsComponent';
-import { Error } from '@mui/icons-material';
 
 export default function RoomCard({ supabase, Name, Description, RoomId, setDeleteAlerState, fetchRooms}) {
   const [detailsOpen, setDetailsOpen] = useState(false);
@@ -15,7 +15,11 @@ export default function RoomCard({ supabase, Name, Description, RoomId, setDelet
   const [preRender, setPrerender] = useState(0);
   const detailsHandleOpen = () => setDetailsOpen(true);
   const detailsHandleClose = () => setDetailsOpen(false);
-  
+  const [addSensorOpen, setAddSensorOpen] = useState(false);
+
+  const handleOpenNewSensor = () => setAddSensorOpen(true);
+  const handleCloseNewSensor = () => setAddSensorOpen(false);
+
 
   const style = {
     position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%, -50%)', width: '50%',
@@ -23,10 +27,9 @@ export default function RoomCard({ supabase, Name, Description, RoomId, setDelet
   };
 
   async function fetchMachines() {
-    const { data } = await supabase.from('machine_group').select('machine( * )').eq('id_machine_group', RoomId);
-    setSensorList(data[0].machine); 
+    const { data } = await supabase.from('machine_group').select('machine( * )'). eq('id_machine_group', RoomId);
+    setSensorList(data[0].machine);
   }
-
   const getSensorList = useCallback(() => {
     fetchMachines();
   }, []);
@@ -39,14 +42,21 @@ export default function RoomCard({ supabase, Name, Description, RoomId, setDelet
   return (
     <Card sx={{ minWidth: 275, background: "#C1E1C1" }}>
       <CardContent>
+        <Box sx={{ display: 'flex', flexWrap: 'wrap', justifyContent:"space-between", flexDirection: 'row', p: 1, m: 1, }}>
         <Typography variant="h5" component="div">
           Room's Name: {Name}
         </Typography>
+        <Fab variant="extended" onClick={handleOpenNewSensor} sx={{ size: '140%', background: "#FFFFFF", color: "#228B22"}} >
+          <AddIcon/>
+            New Sensor
+          </Fab>
+        </Box>
         <Box sx={{ display: 'flex', flexWrap: 'wrap', flexDirection: 'row', p: 1, m: 1, }}>
           {sensorList.map(element => (
             <Box key={element.id_machine} sx={{ paddingX: '0.3%' }}> <SensorCard Name={element.name} Id={element.id_machine} /></Box>
           ))
           }
+          
         </Box>
       </CardContent>
       <CardActions>

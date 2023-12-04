@@ -60,7 +60,7 @@ export default function SensorHomePage({supabase}) {
                 <Typography variant="h3">
                     Your Building/Rooms with Sensors:
                 </Typography>
-                <Fab variant="extended" onClick={handleOpenNewRoom} sx={{ size: '140%', background: "#228B22" }} >
+                <Fab variant="extended" onClick={handleOpenNewRoom} sx={{ size: '140%', background: "#228B22", color:"#ffffff"}} >
                     <AddIcon/>
                     New Room
                 </Fab>

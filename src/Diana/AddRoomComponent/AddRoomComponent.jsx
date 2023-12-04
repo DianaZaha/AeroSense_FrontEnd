@@ -3,7 +3,6 @@ import { Box, Button, TextField } from '@mui/material';
 
 export default function AddRoomComponent({ supabase, UserID , onClose, setAlerState}) {
     const [length, setLength] = useState(0);
-    const [takenName, setTakenName] = useState(false);
 
     const StoreInput = () => {
         var RoomName = document.getElementById("NameTxtField").value;
