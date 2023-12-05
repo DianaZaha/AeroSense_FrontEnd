@@ -10,6 +10,7 @@ import { ThemeProvider } from '@emotion/react';
 import SideBarComponent from './Diana/SensorHomePage/SideBarComponent/SideBarComponent';
 import { RoutinesPage } from './Denisa/RoutinesPage/RoutinesPage';
 import SensorHomePage from './Diana/SensorHomePage/SensorHomePage';
+import StatisticsPageComponent from './Blue/StatisticsPageComponent/StatisticsPageComponent';
 
 const mdTheme = createTheme();
 
@@ -27,6 +28,7 @@ function App() {
               <Route exact={true} path="/sensor" element={<UserSensorStatistics/>}/>
               <Route exact={true} path="/sensors" element={<SensorHomePage supabase={supabase}/>}/>
               <Route exact={true} path='/routines' element={<RoutinesPage supabase={supabase}/>}/>
+              <Route exact={true} path="/statistics" element={<StatisticsPageComponent/>}/>
             </Routes>
           </Container>
         </SideBarComponent> 
