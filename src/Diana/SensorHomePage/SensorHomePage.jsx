@@ -5,6 +5,8 @@ import RoomCard from './RoomCard/RoomCard';
 import AddRoomComponent from '../AddRoomComponent/AddRoomComponent';
 import AlertAddRoom from '../AddRoomComponent/AlertAddRoom'
 import AlertDeleteRoom from '../RoomDetailsComponent/AlertDeleteRoom';
+import UnallocatedSensorsCard from './RoomCard/UnallocatedSensorsCard';
+import AlertAddSensor from '../AddSensorComponent/AlertAddSensor';
 
 const style = {
     position: 'absolute',
@@ -17,12 +19,14 @@ const style = {
     p: 4,
 };
 
-export default function SensorHomePage({supabase}) {
+export default function SensorHomePage({ supabase }) {
     const [Rooms, setRooms] = useState([]);
+    const [unallocatedSensors, SetUnallocatedSensors] = useState([]);
     const [preRender, setPrerender] = useState(0);
     const [openNewRoom, setOpenNewRoom] = useState(false);
     const [addRoomStatus, setAddRoomStatus] = useState('');
     const [deleteRoomStatus, setDeleteRoomStatus] = useState('');
+    const [addSensorStatus, setAddSensorStatus] = useState('');
     const [openSnackBar, setOpenSnackBar] = useState(false);
     const handleOpenNewRoom = () => setOpenNewRoom(true);
     const handleCloseNewRoom = () => setOpenNewRoom(false);
@@ -39,12 +43,28 @@ export default function SensorHomePage({supabase}) {
         fetchRooms();
     }, []);
 
+    const setAddSensorAlerState = useCallback((val) => {
+        setOpenSnackBar(true);
+        setAddSensorStatus(val);
+        fetchRooms();
+    }, []);
+
     async function fetchRooms() {
-        const { data: FetchedRooms } = await supabase.from('machine_group').select('*').eq('id_user', 1);
-        setRooms(FetchedRooms);
+        const { data: FetchedRooms, error } = await supabase.from('room').select('*').eq('id_user', 1);
+        if (error != null)
+            setRooms([]);
+        else
+            setRooms(FetchedRooms);
+        const { data: FetchedSensors, error1 } = await supabase.from('sensor').select('*').eq('id_user', 1).is('id_room', null);
+        if (error1 != null)
+            SetUnallocatedSensors([]);
+        else {
+            FetchedSensors.sort((a, b) => a.id_sensor > b.id_sensor ? 1 : -1);
+            SetUnallocatedSensors(FetchedSensors);
+        }
     }
 
-    const setSnackBarOpen = useCallback((value)=>{
+    const setSnackBarOpen = useCallback((value) => {
         setOpenSnackBar(value);
     }, []);
 
@@ -60,32 +80,35 @@ export default function SensorHomePage({supabase}) {
                 <Typography variant="h3">
                     Your Building/Rooms with Sensors:
                 </Typography>
-                <Fab variant="extended" onClick={handleOpenNewRoom} sx={{ size: '140%', background: "#228B22", color:"#ffffff"}} >
-                    <AddIcon/>
+                <Fab variant="extended" onClick={handleOpenNewRoom} sx={{ size: '140%', background: "#228B22", color: "#ffffff" }} >
+                    <AddIcon />
                     New Room
                 </Fab>
             </Container>
             {
                 Rooms.map(element => (
-                    <Box key={element.id_machine_group} sx={{ paddingY: '0.5%' }}>
+                    <Box key={element.id_room} sx={{ paddingY: '0.5%' }}>
                         <RoomCard
                             supabase={supabase}
                             Name={element.name}
                             Description={element.description}
-                            RoomId={element.id_machine_group}
-                            setDeleteAlerState={setDeleteAlerState} 
-                            fetchRooms = {fetchRooms}
+                            RoomId={element.id_room}
+                            setDeleteAlerState={setDeleteAlerState}
+                            setAddSensorAlerState={setAddSensorAlerState}
+                            fetchRooms={fetchRooms}
                         />
                     </Box>
                 ))
             }
+            <UnallocatedSensorsCard unallocatedList={unallocatedSensors} />
             <Modal open={openNewRoom} onClose={handleCloseNewRoom} >
                 <Box sx={style}>
                     <AddRoomComponent UserID={1} supabase={supabase} onClose={handleCloseNewRoom} setAlerState={setAlerState} />
                 </Box>
             </Modal>
-            <AlertAddRoom addRoomStatus={addRoomStatus} open={openSnackBar} setSnackBarOpen={setSnackBarOpen}/>
-            <AlertDeleteRoom deleteRoomStatus={deleteRoomStatus} open={openSnackBar} setSnackBarOpen={setSnackBarOpen}/>
+            <AlertAddRoom addRoomStatus={addRoomStatus} open={openSnackBar} setSnackBarOpen={setSnackBarOpen} />
+            <AlertDeleteRoom deleteRoomStatus={deleteRoomStatus} open={openSnackBar} setSnackBarOpen={setSnackBarOpen} />
+            <AlertAddSensor addSensorStatus={addSensorStatus} open={openSnackBar} setSnackBarOpen={setSnackBarOpen} />
         </Box>
     )
 }

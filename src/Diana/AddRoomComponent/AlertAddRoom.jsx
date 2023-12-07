@@ -1,6 +1,5 @@
 import React from 'react'
 import { Snackbar, Alert } from '@mui/material'
-import SensorHomePage from '../SensorHomePage/SensorHomePage';
 
 export default function AlertAddRoom({ addRoomStatus, open, setSnackBarOpen}) {
 

@@ -25,8 +25,9 @@ export default function RoomDetailsComponent({ supabase, RoomId, RoomName, RoomD
     ];
 
     const sensorsGridRows = [];
-    RoomSensorList.forEach(element => { sensorsGridRows.push({ id: element.id_machine, SensorName: element.name }); })
-
+    console.log(RoomSensorList);
+    RoomSensorList.forEach(element => { sensorsGridRows.push({ id: element.id_sensor, SensorName: element.name }); })
+    
     const handleDeleteRoom = () => {
         deleteRoom(RoomId);
     }
@@ -39,11 +40,16 @@ export default function RoomDetailsComponent({ supabase, RoomId, RoomName, RoomD
 
 
     const deleteRoom = async (RoomId) => {
-        const { error } = await supabase.from('machine_group').delete().eq('id_machine_group', RoomId);
+        const { data, error1 } = await supabase.from('sensor').update({ id_room: 'NULL'}).eq('id_room', RoomId).select();
+        if(error1 != null)
+            setDeleteAlerState('error-database');
+        else{
+        const { error } = await supabase.from('room').delete().eq('id_room', RoomId);
         if (error != null)
             setDeleteAlerState('error-database');
         else
             setDeleteAlerState('deleted-successfully');
+        }
     };
 
     const handleModifyRoom = () => {
@@ -61,10 +67,10 @@ export default function RoomDetailsComponent({ supabase, RoomId, RoomName, RoomD
         if(NewRoomName != roomName){
             changeName = true;
         }
-        const { data: machine_group, error1 } = await supabase.from('machine_group').select('name').eq('name', NewRoomName);
+        const { data: rooms, error1 } = await supabase.from('room').select('name').eq('name', NewRoomName);
 
-        if ((machine_group.length == 0 && changeName) || !changeName) {
-            const { data, error } = await supabase.from('machine_group').update({ id_machine_group: id, description: NewRoomDescription, name: NewRoomName }).eq('id_machine_group', id).single();
+        if ((rooms.length == 0 && changeName) || !changeName) {
+            const { data, error } = await supabase.from('room').update({ id_room: id, description: NewRoomDescription, name: NewRoomName }).eq('id_room', id).single();
             console.log(error);
             if (error != null) {
                 setModifyRoomAlert('error-database');
