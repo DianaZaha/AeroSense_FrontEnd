@@ -2,6 +2,7 @@ import React from 'react';
 import { createClient } from '@supabase/supabase-js'
 import HomePage from './HomePageComponent/HomePage';
 import CreateAccount from './CreateAccountPageComponent/CreateAccount';
+import CreateUserPage from './Deni/CreateUserPage'
 import HomePageUserAccount from './HomePageUserAccount/HomePageUserAccount';
 import { Routes, Route } from 'react-router-dom';
 import UserSensorStatistics from './UserSensorStatistics/UserSensorStatistics';
@@ -25,6 +26,7 @@ function App() {
               <Route exact={true} path="/user" element={<HomePageUserAccount/>}/>
               <Route exact={true} path="/create" element={<CreateAccount/>}/>
               <Route exact={true} path="/sensor" element={<UserSensorStatistics/>}/>
+              <Route exact={true} path="/create-user" element={<CreateUserPage/>}/>
               <Route exact={true} path="/sensors" element={<SensorHomePage supabase={supabase}/>}/>
               <Route exact={true} path='/routines' element={<RoutinesPage supabase={supabase}/>}/>
             </Routes>
