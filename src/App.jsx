@@ -15,6 +15,7 @@ import RoutineDetails from './Crista/components/RoutineDetails';
 import AddCard from './Diana/SensorHomePage/AddCard/AddCard';
 import RoomCard from './Diana/SensorHomePage/RoomCard/RoomCard';
 import SensorHomePage from './Diana/SensorHomePage/SensorHomePage';
+import Footer from './Teo/FooterComponent/Footer';
 
 const mdTheme = createTheme();
 
@@ -34,6 +35,7 @@ function App() {
             </Routes>
           </Container>
         </SideBarComponent> 
+        <Footer></Footer>
     </ThemeProvider>
   )
 }
