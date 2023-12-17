@@ -9,6 +9,7 @@ import SideBarComponent from './Diana/SensorHomePage/SideBarComponent/SideBarCom
 import { RoutinesPage } from './Deni/RoutinesPage/RoutinesPage';
 import SensorHomePage from './Diana/SensorHomePage/SensorHomePage';
 import LoginPage from './Crista/components/UserLoginPage';
+import PremiumPage from './Deni/PremiumPage';
 import AccountHomePage from './Maria/AccountHomePage/AccountHomePage';
 
 const mdTheme = createTheme();
