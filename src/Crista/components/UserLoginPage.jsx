@@ -10,16 +10,17 @@ import Paper from '@mui/material/Paper';
 import Box from '@mui/material/Box';
 import Grid from '@mui/material/Grid';
 import Typography from '@mui/material/Typography';
+import { Collapse, Alert, Modal } from '@mui/material';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
-import { Link as RouterLink } from 'react-router-dom';
+import { Link as RouterLink, Navigate } from 'react-router-dom';
 
 
 function Copyright(props) {
   return (
     <Typography variant="body2" color="text.secondary" align="center" {...props}>
       {'Copyright © '}
-      <Link color="inherit" href="https://mui.com/">
+      <Link color="inherit" href="/">
         AeroSense
       </Link>{' '}
       {new Date().getFullYear()}
@@ -28,17 +29,53 @@ function Copyright(props) {
   );
 }
 
+const style = {
+  position: 'absolute',
+  top: '50%',
+  left: '50%',
+  transform: 'translate(-50%, -50%)',
+  width: 400,
+  bgcolor: 'background.paper',
+  border: '2px solid #000',
+  boxShadow: 24,
+  p: 4,
+}
+
 const defaultTheme = createTheme();
 
-export default function SignInSide() {
-  const handleSubmit = (event) => {
+export default function SignInSide({supabase}) {
+  const handleSubmit = async (event) => {
     event.preventDefault();
-    const data = new FormData(event.currentTarget);
-    console.log({
-      email: data.get('email'),
-      password: data.get('password'),
-    });
+    const formData = new FormData(event.currentTarget);
+
+    if(formData.get('email').length === 0 || formData.get('password').length === 0){
+      setOpenAlert(true);
+      return;
+    }
+
+    const { data } = await supabase.from('users').select('*').eq('email', formData.get('email')).eq('password', formData.get('password'));
+    
+    if(data.length === 0) {
+      handleOpenModal();
+      return;
+    }
+
+    localStorage.setItem('role', data[0].admin);
+    window.location.reload(false);
   };
+
+  const [openAlert, setOpenAlert] = React.useState(false);
+  const handleClose = (_event, reason) => {
+		if (reason === 'clickaway') {
+		return;
+		}
+
+		setOpenAlert(false);
+	};
+
+  const [openModal, setOpenModal] = React.useState(false);
+  const handleOpenModal = () => setOpenModal(true);
+  const handleCloseModal = () => setOpenModal(false);
 
   return (
     <ThemeProvider theme={defaultTheme}>
@@ -106,6 +143,11 @@ export default function SignInSide() {
                 sx={{ mt: 3, mb: 2, backgroundColor: '#228B22', color: 'white', '&:hover': { backgroundColor: 'darkgreen', } }}>
                 Sign In
               </Button>
+              <Collapse in={openAlert}>
+                <Alert open={openAlert} onClose={handleClose} severity='error' sx={{ width: '100%' }}>
+                  Both fields need to be completed!
+                </Alert>
+              </Collapse>
               <Grid container>
                 <Grid item>
                 <Link component={RouterLink} to="/create-user" variant="body2">
@@ -118,6 +160,21 @@ export default function SignInSide() {
           </Box>
         </Grid>
       </Grid>
+      <Modal
+        open={openModal}
+        onClose={handleCloseModal}
+        aria-labelledby="modal-modal-title"
+        aria-describedby="modal-modal-description"
+      >
+        <Box sx={style}>
+          <Typography id="modal-modal-title" variant="h6" component="h2">
+            Atuhentication error!
+          </Typography>
+          <Typography id="modal-modal-description" sx={{ mt: 2 }}>
+            The user with the given email does not exist or the provided password does not match the user.
+          </Typography>
+        </Box>
+      </Modal>
     </ThemeProvider>
   );
 }
