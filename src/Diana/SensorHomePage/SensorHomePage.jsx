@@ -7,6 +7,7 @@ import AlertAddRoom from '../AddRoomComponent/AlertAddRoom'
 import AlertDeleteRoom from '../RoomDetailsComponent/AlertDeleteRoom';
 import UnallocatedSensorsCard from './RoomCard/UnallocatedSensorsCard';
 import AlertAddSensor from '../AddSensorComponent/AlertAddSensor';
+import AlertDeleteSensor from '../RoomDetailsComponent/AlertDeleteSensor';
 
 const style = {
     position: 'absolute',
@@ -27,27 +28,10 @@ export default function SensorHomePage({ supabase }) {
     const [addRoomStatus, setAddRoomStatus] = useState('');
     const [deleteRoomStatus, setDeleteRoomStatus] = useState('');
     const [addSensorStatus, setAddSensorStatus] = useState('');
+    const [deleteSensorStatus, setDeleteSensorStatus] = useState('');
     const [openSnackBar, setOpenSnackBar] = useState(false);
     const handleOpenNewRoom = () => setOpenNewRoom(true);
     const handleCloseNewRoom = () => setOpenNewRoom(false);
-
-    const setAlerState = useCallback((val) => {
-        setOpenSnackBar(true);
-        setAddRoomStatus(val);
-        fetchRooms();
-    }, []);
-
-    const setDeleteAlerState = useCallback((val) => {
-        setOpenSnackBar(true);
-        setDeleteRoomStatus(val);
-        fetchRooms();
-    }, []);
-
-    const setAddSensorAlerState = useCallback((val) => {
-        setOpenSnackBar(true);
-        setAddSensorStatus(val);
-        fetchRooms();
-    }, []);
 
     async function fetchRooms() {
         const { data: FetchedRooms, error } = await supabase.from('room').select('*').eq('id_user', 1);
@@ -64,15 +48,57 @@ export default function SensorHomePage({ supabase }) {
         }
     }
 
+    function resetAllerts() {
+        setDeleteSensorStatus('');
+        setAddRoomStatus('');
+        setDeleteRoomStatus('');
+        setAddSensorStatus('');
+    }
+
+    const setDeleteSensorAlerState = useCallback((val)=>{
+        resetAllerts();
+        setDeleteSensorStatus(val);
+        setOpenSnackBar(true);
+        fetchRooms();
+
+    }, []);
+
+    const setAddRoomAlerState = useCallback((val) => {
+        resetAllerts();
+        setAddRoomStatus(val);
+        setOpenSnackBar(true);
+        fetchRooms();
+    }, []);
+
+    const setDeleteAlerState = useCallback((val) => {
+        resetAllerts()
+        setDeleteRoomStatus(val);
+        setOpenSnackBar(true);
+        fetchRooms();
+    }, []);
+
+    const setAddSensorAlerState = useCallback((val) => {
+        resetAllerts();
+        setAddSensorStatus(val);
+        setOpenSnackBar(true);
+        fetchRooms();
+    }, []);
+
     const setSnackBarOpen = useCallback((value) => {
         setOpenSnackBar(value);
     }, []);
 
-    if (preRender === 0) {
-        setAlerState('');
-        setPrerender(1);
-        setOpenSnackBar(false);
-    }
+    useEffect(() => {
+        async function fetchData() {
+            try {
+                fetchRooms();
+                setPrerender(1);
+            } catch (error) {
+                console.error('Error fetching data:', error.message);
+            }
+        }
+        fetchData();
+    }, [Rooms,preRender]);
 
     return (
         <Box sx={{ padding: '2%', width: '100%' }}>
@@ -85,7 +111,7 @@ export default function SensorHomePage({ supabase }) {
                     New Room
                 </Fab>
             </Container>
-            {
+            {preRender > 0 &&
                 Rooms.map(element => (
                     <Box key={element.id_room} sx={{ paddingY: '0.5%' }}>
                         <RoomCard
@@ -93,22 +119,24 @@ export default function SensorHomePage({ supabase }) {
                             Name={element.name}
                             Description={element.description}
                             RoomId={element.id_room}
-                            setDeleteAlerState={setDeleteAlerState}
-                            setAddSensorAlerState={setAddSensorAlerState}
                             fetchRooms={fetchRooms}
+                            setAddSensorAlerState={setAddSensorAlerState}
+                            setDeleteAlerState={setDeleteAlerState}
+                            setDeleteSensorAlerState={setDeleteSensorAlerState}
                         />
                     </Box>
                 ))
             }
-            <UnallocatedSensorsCard unallocatedList={unallocatedSensors} />
+            <UnallocatedSensorsCard unallocatedList={unallocatedSensors} supabase={supabase}/>
             <Modal open={openNewRoom} onClose={handleCloseNewRoom} >
                 <Box sx={style}>
-                    <AddRoomComponent UserID={1} supabase={supabase} onClose={handleCloseNewRoom} setAlerState={setAlerState} />
+                    <AddRoomComponent UserID={1} supabase={supabase} onClose={handleCloseNewRoom} setAddRoomAlerState={setAddRoomAlerState} />
                 </Box>
             </Modal>
             <AlertAddRoom addRoomStatus={addRoomStatus} open={openSnackBar} setSnackBarOpen={setSnackBarOpen} />
             <AlertDeleteRoom deleteRoomStatus={deleteRoomStatus} open={openSnackBar} setSnackBarOpen={setSnackBarOpen} />
             <AlertAddSensor addSensorStatus={addSensorStatus} open={openSnackBar} setSnackBarOpen={setSnackBarOpen} />
+            <AlertDeleteSensor deleteSensorStatus={deleteSensorStatus} open={openSnackBar} setSnackBarOpen={setSnackBarOpen}/>
         </Box>
     )
 }

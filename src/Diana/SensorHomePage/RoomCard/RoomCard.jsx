@@ -1,18 +1,12 @@
 import React, { useCallback, useState } from 'react';
-import Card from '@mui/material/Card';
-import CardActions from '@mui/material/CardActions';
-import CardContent from '@mui/material/CardContent';
-import Button from '@mui/material/Button';
-import Typography from '@mui/material/Typography';
-import SensorCard from '../SensorCard/SensorCard';
-import { Box, Modal, Fab } from '@mui/material';
+import { Box, Modal, Fab, Card, CardActions, CardContent, Typography} from '@mui/material';
 import AddIcon from '@mui/icons-material/Add';
 import MenuOpenIcon from '@mui/icons-material/MenuOpen';
 import RoomDetailsComponent from '../../RoomDetailsComponent/RoomDetailsComponent';
 import AddSensorComponent from '../../AddSensorComponent/AddSensorComponent';
+import SensorCard from '../SensorCard/SensorCard';
 
-
-export default function RoomCard({ supabase, Name, Description, RoomId, setDeleteAlerState, setAddSensorAlerState, fetchRooms }) {
+export default function RoomCard({ supabase, Name, Description, RoomId, setAddSensorAlerState, setDeleteAlerState, setDeleteSensorAlerState, fetchRooms }) {
   const [sensorList, setSensorList] = useState([]);
   const [preRender, setPrerender] = useState(0);
 
@@ -37,11 +31,14 @@ export default function RoomCard({ supabase, Name, Description, RoomId, setDelet
 
   async function fetchMachines() {
     const { data: sensors, error } = await supabase.from('sensor').select('*').eq('id_room', RoomId);
-    if (error != null)
+    if (error != null){
       setSensorList([]);
+      return [];
+    }
     else {
       sensors.sort((a, b) => a.id_sensor > b.id_sensor ? 1 : -1);
       setSensorList(sensors);
+      return sensors;
     }
   }
   const getSensorList = useCallback(() => {
@@ -52,6 +49,11 @@ export default function RoomCard({ supabase, Name, Description, RoomId, setDelet
     getSensorList();
     setPrerender(1);
   }
+
+  const setDelSensAl = useCallback((val)=>{
+    fetchMachines();
+    setDeleteSensorAlerState(val);
+  }, []);
 
   const setAddSensorAlerStateRoomCard = useCallback((val) => {
     fetchMachines();
@@ -71,7 +73,7 @@ export default function RoomCard({ supabase, Name, Description, RoomId, setDelet
         </Box>
         <Box sx={{ display: 'flex', flexWrap: 'wrap', flexDirection: 'row', p: 1, m: 1, }}>
           {sensorList.map(element => (
-            <Box key={element.id_sensor} sx={{ paddingX: '0.3%', paddingY: '0.3%' }}> <SensorCard Name={element.name} Id={element.id_sensor} /></Box>
+            <Box key={element.id_sensor} sx={{ paddingX: '0.3%', paddingY: '0.3%' }}> <SensorCard Name={element.name} Id={element.id_sensor} supabase={supabase} setDeleteSensorAlerState={setDelSensAl}/></Box>
           ))
           }
           <Card sx={{ minWidth: 275, background: "#C1E1C1" }}>
@@ -101,7 +103,8 @@ export default function RoomCard({ supabase, Name, Description, RoomId, setDelet
               RoomDetailsDescription={Description}
               RoomSensorList={sensorList} onClose={detailsHandleClose}
               setDeleteAlerState={setDeleteAlerState}
-              fetchRooms={fetchRooms} />
+              fetchRooms={fetchRooms}
+              fetchMachines={fetchMachines} />
           </Box>
         </Modal>
       </CardActions>

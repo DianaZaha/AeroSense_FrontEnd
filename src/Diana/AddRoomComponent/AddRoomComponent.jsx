@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { Box, Button, TextField } from '@mui/material';
 
-export default function AddRoomComponent({ supabase, UserID , onClose, setAlerState}) {
+export default function AddRoomComponent({ supabase, UserID , onClose, setAddRoomAlerState}) {
     const [length, setLength] = useState(0);
 
     const StoreInput = () => {
@@ -28,12 +28,12 @@ export default function AddRoomComponent({ supabase, UserID , onClose, setAlerSt
         if(machine_group.length ==0){
         let { data, error } = await supabase.from('room').insert({id_room: id , id_user:  UserID , description:  RoomDescription , name:  RoomName }).single();
             if(error != null)
-                setAlerState('error-database');
+            setAddRoomAlerState('error-database');
             else
-                setAlerState('added-successfully');
+            setAddRoomAlerState('added-successfully');
         }
         else
-            setAlerState('error-similar-name');
+        setAddRoomAlerState('error-similar-name');
     };
 
     return (

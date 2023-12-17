@@ -7,16 +7,16 @@ export default function AlertAddRoom({ addRoomStatus, open, setSnackBarOpen}) {
     return (
         <>
             {addRoomStatus === 'added-successfully' &&
-                <Snackbar open={open} autoHideDuration={6000} onClose={handleSnackBarClose}>
+                <Snackbar open={open} autoHideDuration={6000} onClose={handleSnackBarClose} anchorOrigin={{ vertical:'top', horizontal:'center' }}>
                     <Alert severity="success">Room was added successfully! 😊
                     </Alert>
                 </Snackbar>}
             {addRoomStatus === 'error-similar-name' &&
-                <Snackbar open={open} autoHideDuration={6000} onClose={handleSnackBarClose}>
+                <Snackbar open={open} autoHideDuration={6000} onClose={handleSnackBarClose} anchorOrigin={{ vertical:'top', horizontal:'center' }}>
                     <Alert severity="error">There exists a room with similar name 🤔</Alert>
                 </Snackbar>}
             {addRoomStatus === 'error-database' &&
-                <Snackbar open={open} autoHideDuration={6000} onClose={handleSnackBarClose}>
+                <Snackbar open={open} autoHideDuration={6000} onClose={handleSnackBarClose} anchorOrigin={{ vertical:'top', horizontal:'center' }}>
                     <Alert severity="error">Please try again later! 😔</Alert>
                 </Snackbar>}
         </>

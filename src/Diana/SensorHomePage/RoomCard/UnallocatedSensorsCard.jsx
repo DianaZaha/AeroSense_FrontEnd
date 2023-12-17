@@ -9,7 +9,7 @@ import { Box, Modal, Fab} from '@mui/material';
 import AddIcon from '@mui/icons-material/Add';
 import RoomDetailsComponent from '../../RoomDetailsComponent/RoomDetailsComponent';
 
-export default function UnallocatedSensorsCard({unallocatedList}) {
+export default function UnallocatedSensorsCard({unallocatedList, supabase}) {
   const [addSensorOpen, setAddSensorOpen] = useState(false);
 
   const handleOpenNewSensor = () => setAddSensorOpen(true);
@@ -35,7 +35,7 @@ export default function UnallocatedSensorsCard({unallocatedList}) {
         </Box>
         <Box sx={{ display: 'flex', flexWrap: 'wrap', flexDirection: 'row', p: 1, m: 1, }}>
           {unallocatedList.map(element => (
-            <Box key={element.id_sensor} sx={{ paddingX: '0.3%' }}> <SensorCard Name={element.name} Id={element.id_sensor} /></Box>
+            <Box key={element.id_sensor} sx={{ paddingX: '0.3%' }}> <SensorCard Name={element.name} Id={element.id_sensor} supabase={supabase} /></Box>
           ))
           }
         </Box>

@@ -5,7 +5,7 @@ import AddIcon from '@mui/icons-material/Add';
 
 export default function AddSensorComponent({ UserID, RoomID, supabase, onClose, setAddSensorAlerState }) {
   const [unallocatedSensors, SetUnallocatedSensors] = useState([]);
-  const [idSensor, setIdSensor] = React.useState(0);
+  const [idSensor, setIdSensor] = React.useState('');
   const [prerender, setPrerender] = useState(0);
 
   const handleChange = (event) => {
@@ -67,7 +67,7 @@ export default function AddSensorComponent({ UserID, RoomID, supabase, onClose, 
               onChange={handleChange}
             >
               {
-                unallocatedSensors.map(element => (<MenuItem value={element.id_sensor}>{element.id_sensor} | {element.name}</MenuItem>))
+                unallocatedSensors.map(element => (<MenuItem  key={element.id_sensor} value={element.id_sensor}>{element.id_sensor} | {element.name}</MenuItem>))
               }
             </Select>
           </FormControl>

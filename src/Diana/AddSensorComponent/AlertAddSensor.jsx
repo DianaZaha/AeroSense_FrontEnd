@@ -8,12 +8,12 @@ export default function AlertAddSensor({ addSensorStatus, open, setSnackBarOpen}
     return (
         <>
             {addSensorStatus === 'added-successfully' &&
-                <Snackbar open={open} autoHideDuration={6000} onClose={handleSnackBarClose}>
+                <Snackbar open={open} autoHideDuration={6000} onClose={handleSnackBarClose} anchorOrigin={{ vertical:'top', horizontal:'center' }}>
                     <Alert severity="success">Sensor was added to room successfully! 😊
                     </Alert>
                 </Snackbar>}
             {addSensorStatus === 'error-database' &&
-                <Snackbar open={open} autoHideDuration={6000} onClose={handleSnackBarClose}>
+                <Snackbar open={open} autoHideDuration={6000} onClose={handleSnackBarClose} anchorOrigin={{ vertical:'top', horizontal:'center' }}>
                     <Alert severity="error">Please try again later! 😔</Alert>
                 </Snackbar>}
         </>
