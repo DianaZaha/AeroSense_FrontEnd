@@ -27,7 +27,7 @@ function App() {
               <Route exact={true} path="/login" element ={<LoginPage/>}/>
               <Route exact={true} path="/create-user" element={<CreateUserPage/>}/>
               <Route exact={true} path="/sensors" element={<SensorHomePage supabase={supabase}/>}/>
-              <Route exact={true} path='/routines' element={<RoutinesPage supabase={supabase}/>}/>
+              <Route exact={true} path='/routines' element={<RoutinesPage supabase={supabase} userId={1}/>}/>
             </Routes>
           </Container>
         </SideBarComponent> 
@@ -36,3 +36,4 @@ function App() {
 }
 
 export default App;
+ 
