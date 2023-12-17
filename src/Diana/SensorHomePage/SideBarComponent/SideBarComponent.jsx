@@ -24,6 +24,7 @@ import AppSettingsAltIcon from '@mui/icons-material/AppSettingsAlt';
 import BarChartIcon from '@mui/icons-material/BarChart';
 import ManageAccountsIcon from '@mui/icons-material/ManageAccounts';
 import SettingsIcon from '@mui/icons-material/Settings';
+import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 
 const drawerWidth = 240;
 
@@ -201,7 +202,7 @@ export default function SideBarComponent({ children }) {
         </List>
         <Divider />
         <List>
-          <ListItem key={"AccountPage"} disablePadding sx={{ display: 'block' }} component={Link} to={'/user'}>
+          <ListItem key={"AccountPage"} disablePadding sx={{ display: 'block' }} component={Link} to={'/account'}>
             <ListItemButton
               sx={{
                 minHeight: 48,
@@ -221,7 +222,7 @@ export default function SideBarComponent({ children }) {
               <ListItemText primary={"Account"} sx={{ opacity: open ? 1 : 0 }} />
             </ListItemButton>
           </ListItem>
-          <ListItem key={"SettingsPage"} disablePadding sx={{ display: 'block' }} component={Link} to={'/settings'}>
+          <ListItem key={"Login"} disablePadding sx={{ display: 'block' }} component={Link} to={'/login'}>
             <ListItemButton
               sx={{
                 minHeight: 48,
@@ -236,9 +237,9 @@ export default function SideBarComponent({ children }) {
                   justifyContent: 'center',
                 }}
               >
-                <ManageAccountsIcon/>
+                <AccountCircleIcon />
               </ListItemIcon>
-              <ListItemText primary={"Settings"} sx={{ opacity: open ? 1 : 0 }} />
+              <ListItemText primary={"Login"} sx={{ opacity: open ? 1 : 0 }} />
             </ListItemButton>
           </ListItem>
         </List>
