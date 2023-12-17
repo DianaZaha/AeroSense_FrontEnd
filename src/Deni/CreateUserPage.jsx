@@ -13,11 +13,22 @@ import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import PersonIcon from '@mui/icons-material/Person';
 import FormGroup from '@mui/material/FormGroup';
+import Stack from '@mui/material/Stack';
+import Modal from '@mui/material/Modal';
+import PremiumPage from './PremiumPage';
 
 // TODO remove, this demo shouldn't need to reset the theme.
 const defaultTheme = createTheme();
 
 export default function CreateUserPage() {
+  const [open, setOpen] = React.useState(false);
+  const handleOpen = () => {
+    setOpen(true);
+  };
+  const handleClose = () => {
+    setOpen(false);
+  };
+
   const handleSubmit = (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
@@ -91,11 +102,15 @@ export default function CreateUserPage() {
             />
 
             <FormGroup>
-   
+
+            <Stack direction='row'>
             <FormControlLabel control={<Checkbox default />} label="Go PREMIUM!" />
              {/* <FormControlLabel required control={<Checkbox />} label="Required" />
-             <FormControlLabel disabled control={<Checkbox />} label="Disabled" /> */}
-       
+             <FormControlLabel disabled control={<Checkbox />} label="Disabled" /> */}            
+            <Button variant="outlined" onClick={handleOpen}>See details</Button>
+            
+            </Stack>
+
             </FormGroup>
         
             <Grid container>
@@ -103,15 +118,27 @@ export default function CreateUserPage() {
                 type="submit"
                 fullWidth
                 variant="contained"
-                sx={{ mt: 3, mb: 2,backgroundColor: '#32CD32', color: 'white', '&:hover': {backgroundColor: 'darkgreen' ,} }}
+                sx={{ mt: 3, mb: 2,backgroundColor: '#228B22', color: 'white', '&:hover': {backgroundColor: 'darkgreen' ,} }}
                 >
                 Create
 
                 </Button>
             </Grid> 
+            <Modal
+              open={open}
+              onClose={handleClose}
+              sx={{
+                display: 'flex',
+                justifyContent:'center',
+                alignItems: 'center',
+              }}
+            >
+              <Box sx={{  minWidth: 1000 }}>
+                  <PremiumPage/>
+              </Box>
+            </Modal>
           </Box>
         </Box>
-        {/* <Copyright sx={{ mt: 8, mb: 4 }} /> */}
       </Container>
     </ThemeProvider>
   );

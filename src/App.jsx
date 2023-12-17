@@ -12,6 +12,7 @@ import SideBarComponent from './Diana/SensorHomePage/SideBarComponent/SideBarCom
 import { RoutinesPage } from './Denisa/RoutinesPage/RoutinesPage';
 import SensorHomePage from './Diana/SensorHomePage/SensorHomePage';
 import LoginPage from './Crista/components/UserLoginPage';
+import PremiumPage from './Deni/PremiumPage';
 
 const mdTheme = createTheme();
 
@@ -23,8 +24,9 @@ function App() {
         <SideBarComponent>
           <Container maxWidth='xl'>
             <Routes>
-              <Route exact={true} path="/" element={<HomePage/>}/>
               <Route exact={true} path="/login" element ={<LoginPage/>}/>
+              <Route exact={true} path="/" element={<HomePage/>}/>
+              <Route exact={true} path="/premium" element={<PremiumPage/>}/>
               <Route exact={true} path="/create-user" element={<CreateUserPage/>}/>
               <Route exact={true} path="/sensors" element={<SensorHomePage supabase={supabase}/>}/>
               <Route exact={true} path='/routines' element={<RoutinesPage supabase={supabase}/>}/>
