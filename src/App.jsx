@@ -9,7 +9,7 @@ import UserSensorStatistics from './UserSensorStatistics/UserSensorStatistics';
 import { Container, createTheme} from '@mui/material'
 import { ThemeProvider } from '@emotion/react';
 import SideBarComponent from './Diana/SensorHomePage/SideBarComponent/SideBarComponent';
-import { RoutinesPage } from './Denisa/RoutinesPage/RoutinesPage';
+import { RoutinesPage } from './Deni/RoutinesPage/RoutinesPage';
 import SensorHomePage from './Diana/SensorHomePage/SensorHomePage';
 import LoginPage from './Crista/components/UserLoginPage';
 
@@ -27,7 +27,7 @@ function App() {
               <Route exact={true} path="/login" element ={<LoginPage/>}/>
               <Route exact={true} path="/create-user" element={<CreateUserPage/>}/>
               <Route exact={true} path="/sensors" element={<SensorHomePage supabase={supabase}/>}/>
-              <Route exact={true} path='/routines' element={<RoutinesPage supabase={supabase}/>}/>
+              <Route exact={true} path='/routines' element={<RoutinesPage supabase={supabase} userId={1}/>}/>
             </Routes>
           </Container>
         </SideBarComponent> 
@@ -36,3 +36,4 @@ function App() {
 }
 
 export default App;
+ 
