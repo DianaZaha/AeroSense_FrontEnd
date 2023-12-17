@@ -1,19 +1,94 @@
-import React, { useState, useCallback } from 'react'
-import { Container, Fab, Typography, Box, TextField } from '@mui/material'
-import { DataGrid } from '@mui/x-data-grid';
+import React, { useState, useCallback, useEffect } from 'react'
+import { Container, Fab, Typography, Box, TextField, Button } from '@mui/material'
+import {
+    DataGrid,
+    GridToolbarContainer,
+    GridToolbarColumnsButton,
+    GridToolbarFilterButton,
+    GridToolbarExport,
+    GridToolbarDensitySelector,
+} from '@mui/x-data-grid';
 import EditIcon from '@mui/icons-material/Edit';
 import DeleteIcon from '@mui/icons-material/Delete';
 import SaveIcon from '@mui/icons-material/Save';
 import ClearIcon from '@mui/icons-material/Clear';
 import AlertModifyRoom from './AlertModifyRoom';
+import AlertDeleteSensor from './AlertDeleteSensor';
 
-export default function RoomDetailsComponent({ supabase, RoomId, RoomName, RoomDetailsDescription, RoomSensorList, setDeleteAlerState, fetchRooms }) {
+export default function RoomDetailsComponent({ supabase, RoomId, RoomName, RoomDetailsDescription, RoomSensorList, setDeleteAlerState, fetchRooms, fetchMachines }) {
 
     const [notModifying, setNotModifying] = useState(true);
     const [roomName, setRoomName] = useState(RoomName);
     const [roomDescription, setRoomDescription] = useState(RoomDetailsDescription);
     const [openSnackBar, setOpenSnackBar] = useState(false);
     const [updateRoomStatus, setUpdateRoomStatus] = useState('');
+    const [deleteSensorStatus, setDeleteSensorStatus] = useState('');
+    const [rowSelectionModel, setRowSelectionModel] = useState([]);
+    const [sensorList, setSensorList] = useState(RoomSensorList);
+    const [sensorsGridRows, setSensorsGridRows] = useState([]);
+    const [preRender, setPrerender] = useState(0);
+
+    function SensorDataGridToolbar() {
+        return (
+            <GridToolbarContainer>
+                <GridToolbarColumnsButton />
+                <GridToolbarFilterButton />
+                <GridToolbarDensitySelector />
+                <GridToolbarExport csvOptions={{ fileName: "Sensor List" }} />
+                <Button onClick={handleRemoveSensors} size='small'><DeleteIcon /> Remove Sensors</Button>
+            </GridToolbarContainer>
+        );
+    }
+
+    const setRemoveSensor = useCallback((val) => {
+        setOpenSnackBar(true);
+        setDeleteSensorStatus(val);
+        setPrerender(-1);
+        fetchRooms();
+        fetchMachines();
+    }, []);
+
+
+    async function removeSensor(IdSensor) {
+        const { data, error } = await supabase.from('sensor').update({ id_room: null }).eq('id_sensor', IdSensor).single();
+        if(error !== null){
+            setRemoveSensor('error-database');
+        }
+        else{
+            setRemoveSensor('removed-successfully');
+        }
+    }
+
+    const handleRemoveSensors = () => {
+        removeSensor(rowSelectionModel[0]);
+    }
+
+    useEffect(() => {
+        async function fetchData() {
+
+            try {
+                // Fetch data from the database
+                const { data: sensors, error } = await supabase.from('sensor').select('*').eq('id_room', RoomId);
+
+                if (error != null) {
+                    setSensorList([]);
+                }
+                else {
+                    sensors.sort((a, b) => a.id_sensor > b.id_sensor ? 1 : -1);
+                    setSensorList(sensors);
+                }
+                // Update the state with the fetched data
+                let list = [];
+                sensorList.map(element => { list.push({ id: element.id_sensor, SensorName: element.name }) })
+                setSensorsGridRows(list);
+                setPrerender(1);
+            } catch (error) {
+                console.error('Error fetching data:', error.message);
+            }
+        }
+
+        fetchData();
+    }, [RoomId,preRender]);
 
     const setSnackBarOpen = useCallback((value) => {
         setOpenSnackBar(value);
@@ -23,9 +98,6 @@ export default function RoomDetailsComponent({ supabase, RoomId, RoomName, RoomD
         { field: 'id', headerName: 'ID', width: 70, height: 20 },
         { field: 'SensorName', headerName: 'Sensor Name', width: 160, height: 20 }
     ];
-
-    const sensorsGridRows = [];
-    RoomSensorList.forEach(element => { sensorsGridRows.push({ id: element.id_machine, SensorName: element.name }); })
 
     const handleDeleteRoom = () => {
         deleteRoom(RoomId);
@@ -39,11 +111,16 @@ export default function RoomDetailsComponent({ supabase, RoomId, RoomName, RoomD
 
 
     const deleteRoom = async (RoomId) => {
-        const { error } = await supabase.from('machine_group').delete().eq('id_machine_group', RoomId);
-        if (error != null)
+        const { data, error1 } = await supabase.from('sensor').update({ id_room: 'NULL' }).eq('id_room', RoomId).select();
+        if (error1 != null)
             setDeleteAlerState('error-database');
-        else
-            setDeleteAlerState('deleted-successfully');
+        else {
+            const { error } = await supabase.from('room').delete().eq('id_room', RoomId);
+            if (error != null)
+                setDeleteAlerState('error-database');
+            else
+                setDeleteAlerState('deleted-successfully');
+        }
     };
 
     const handleModifyRoom = () => {
@@ -58,13 +135,13 @@ export default function RoomDetailsComponent({ supabase, RoomId, RoomName, RoomD
 
     const updateRoomData = async (id, NewRoomDescription, NewRoomName) => {
         let changeName = false;
-        if(NewRoomName != roomName){
+        if (NewRoomName != roomName) {
             changeName = true;
         }
-        const { data: machine_group, error1 } = await supabase.from('machine_group').select('name').eq('name', NewRoomName);
+        const { data: rooms, error1 } = await supabase.from('room').select('name').eq('name', NewRoomName);
 
-        if ((machine_group.length == 0 && changeName) || !changeName) {
-            const { data, error } = await supabase.from('machine_group').update({ id_machine_group: id, description: NewRoomDescription, name: NewRoomName }).eq('id_machine_group', id).single();
+        if ((rooms.length == 0 && changeName) || !changeName) {
+            const { data, error } = await supabase.from('room').update({ id_room: id, description: NewRoomDescription, name: NewRoomName }).eq('id_room', id).single();
             console.log(error);
             if (error != null) {
                 setModifyRoomAlert('error-database');
@@ -80,9 +157,9 @@ export default function RoomDetailsComponent({ supabase, RoomId, RoomName, RoomD
             }
         }
         else {
-            if(changeName){
-            setModifyRoomAlert('error-similar-name');
-            handleDiscardModificationsRoom();
+            if (changeName) {
+                setModifyRoomAlert('error-similar-name');
+                handleDiscardModificationsRoom();
             }
         }
     };
@@ -112,16 +189,25 @@ export default function RoomDetailsComponent({ supabase, RoomId, RoomName, RoomD
                         Sensor List
                     </Typography>
                     <Box style={{ height: '50%', width: '100%' }}>
-                        <DataGrid
+                        {preRender > 0 && <DataGrid
                             columns={sensorsGridColumns}
                             rows={sensorsGridRows}
                             density="compact"
                             initialState={{
-                                pagination: { paginationModel: { page: 0, pageSize: 3 }, },
+                                pagination: { paginationModel: { pageSize: 3 }, },
                             }}
-                            checkboxSelection
                             autoHeight
+                            slots={{
+                                toolbar: SensorDataGridToolbar,
+                            }}
+                            onRowSelectionModelChange={(newRowSelectionModel) => {
+                                setRowSelectionModel(newRowSelectionModel);
+                            }}
+                            rowSelectionModel={rowSelectionModel}
+                            pageSizeOptions={[3, 6]}
+                            disableMultipleRowSelection={true}
                         />
+                        }
                     </Box>
                 </Box>
                 {notModifying === true &&
@@ -149,6 +235,7 @@ export default function RoomDetailsComponent({ supabase, RoomId, RoomName, RoomD
                     </Box>
                 }
                 <AlertModifyRoom updateRoomStatus={updateRoomStatus} open={openSnackBar} setSnackBarOpen={setSnackBarOpen} />
+                <AlertDeleteSensor deleteSensorStatus={deleteSensorStatus} open={openSnackBar} setSnackBarOpen={setSnackBarOpen} />
             </Container>
         </>
     )

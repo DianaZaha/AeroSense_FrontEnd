@@ -1,9 +1,8 @@
 import React, { useEffect, useState } from 'react'
 import { Box, Button, TextField } from '@mui/material';
 
-export default function AddRoomComponent({ supabase, UserID , onClose, setAlerState}) {
+export default function AddRoomComponent({ supabase, UserID , onClose, setAddRoomAlerState}) {
     const [length, setLength] = useState(0);
-    const [takenName, setTakenName] = useState(false);
 
     const StoreInput = () => {
         var RoomName = document.getElementById("NameTxtField").value;
@@ -15,7 +14,7 @@ export default function AddRoomComponent({ supabase, UserID , onClose, setAlerSt
 
     useEffect(() => {
     async function fetchRoomNumber() {
-        const { data: Rooms } = await supabase.from('machine_group').select('*');
+        const { data: Rooms } = await supabase.from('room').select('*');
         var len = 0;
         Rooms.forEach(element => { len = len + 1; });
         setLength(len+1);
@@ -25,16 +24,16 @@ export default function AddRoomComponent({ supabase, UserID , onClose, setAlerSt
 
     const postData = async (id, UserID, RoomDescription, RoomName) => {
 
-        const { data: machine_group, error1 } = await supabase.from('machine_group').select('name').eq('name', RoomName);
+        const { data: machine_group, error1 } = await supabase.from('room').select('name').eq('name', RoomName);
         if(machine_group.length ==0){
-        let { data, error } = await supabase.from('machine_group').insert({id_machine_group: id , id_user:  UserID , description:  RoomDescription , name:  RoomName }).single();
+        let { data, error } = await supabase.from('room').insert({id_room: id , id_user:  UserID , description:  RoomDescription , name:  RoomName }).single();
             if(error != null)
-                setAlerState('error-database');
+            setAddRoomAlerState('error-database');
             else
-                setAlerState('added-successfully');
+            setAddRoomAlerState('added-successfully');
         }
         else
-            setAlerState('error-similar-name');
+        setAddRoomAlerState('error-similar-name');
     };
 
     return (

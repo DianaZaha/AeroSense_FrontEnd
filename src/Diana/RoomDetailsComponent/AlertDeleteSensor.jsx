@@ -1,20 +1,18 @@
 import React from 'react'
 import { Snackbar, Alert } from '@mui/material'
-import SensorHomePage from '../SensorHomePage/SensorHomePage';
 
-export default function AlertDeleteRoom({ deleteRoomStatus, open, setSnackBarOpen}) {
+export default function AlertDeleteSensor({ deleteSensorStatus, open, setSnackBarOpen}) {
 
     const handleSnackBarClose = () => setSnackBarOpen(false);
     return (
         <>
-            {deleteRoomStatus === 'deleted-successfully' &&
+            {deleteSensorStatus === 'removed-successfully' &&
                 <Snackbar open={open} autoHideDuration={6000} onClose={handleSnackBarClose} anchorOrigin={{ vertical:'top', horizontal:'center' }}>
-                    <Alert severity="success">Room was deleted successfully! 😊
-                    </Alert>
+                    <Alert severity="success">Sensor removed successfully!😊</Alert>
                 </Snackbar>}
-            {deleteRoomStatus === 'error-database' &&
+            {deleteSensorStatus === 'error-database' &&
                 <Snackbar open={open} autoHideDuration={6000} onClose={handleSnackBarClose} anchorOrigin={{ vertical:'top', horizontal:'center' }}>
-                    <Alert severity="error">Please try again later! 😔</Alert>
+                    <Alert severity="error">Please try again later!😔</Alert>
                 </Snackbar>}
         </>
     )

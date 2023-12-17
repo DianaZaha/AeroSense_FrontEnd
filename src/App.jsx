@@ -8,6 +8,7 @@ import { ThemeProvider } from '@emotion/react';
 import SideBarComponent from './Diana/SensorHomePage/SideBarComponent/SideBarComponent';
 import { RoutinesPage } from './Deni/RoutinesPage/RoutinesPage';
 import SensorHomePage from './Diana/SensorHomePage/SensorHomePage';
+import StatisticsPageComponent from './Blue/StatisticsPageComponent/StatisticsPageComponent';
 import LoginPage from './Crista/components/UserLoginPage';
 import PremiumPage from './Deni/PremiumPage';
 import AccountHomePage from './Maria/AccountHomePage/AccountHomePage';
@@ -52,6 +53,7 @@ function App() {
               <Route exact={true} path="/sensors" element={<PrivateRouteLogged><SensorHomePage supabase={supabase}/></PrivateRouteLogged>}/>
               <Route exact={true} path='/routines' element={<PrivateRouteLogged><RoutinesPage supabase={supabase} userId={1}/></PrivateRouteLogged>}/>
               <Route exact={true} path='/account' element={<PrivateRouteLogged><AccountHomePage/></PrivateRouteLogged>}/>
+              <Route exact={true} path="/statistics" element={<PrivateRouteAdmin><StatisticsPageComponent/></PrivateRouteAdmin>}/>
             </Routes>
           </Container>
         </SideBarComponent> 
