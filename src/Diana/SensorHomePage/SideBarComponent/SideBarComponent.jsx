@@ -202,7 +202,7 @@ export default function SideBarComponent({ children }) {
         </List>
         <Divider />
         <List>
-          <ListItem key={"AccountPage"} disablePadding sx={{ display: 'block' }} component={Link} to={'/user'}>
+          <ListItem key={"AccountPage"} disablePadding sx={{ display: 'block' }} component={Link} to={'/account'}>
             <ListItemButton
               sx={{
                 minHeight: 48,
