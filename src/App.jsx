@@ -10,6 +10,7 @@ import { ThemeProvider } from '@emotion/react';
 import SideBarComponent from './Diana/SensorHomePage/SideBarComponent/SideBarComponent';
 import { RoutinesPage } from './Denisa/RoutinesPage/RoutinesPage';
 import SensorHomePage from './Diana/SensorHomePage/SensorHomePage';
+import LoginPage from './Crista/components/UserLoginPage';
 
 const mdTheme = createTheme();
 
@@ -21,6 +22,7 @@ function App() {
         <SideBarComponent>
           <Container maxWidth='xl'>
             <Routes>
+              <Route exact={true} path="/login" element ={<LoginPage/>}/>
               <Route exact={true} path="/" element={<HomePage/>}/>
               <Route exact={true} path="/user" element={<HomePageUserAccount/>}/>
               <Route exact={true} path="/create" element={<CreateAccount/>}/>
