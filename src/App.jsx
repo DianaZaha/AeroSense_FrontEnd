@@ -1,17 +1,15 @@
 import React from 'react';
 import { createClient } from '@supabase/supabase-js'
 import HomePage from './HomePageComponent/HomePage';
-import CreateAccount from './CreateAccountPageComponent/CreateAccount';
 import CreateUserPage from './Deni/CreateUserPage'
-import HomePageUserAccount from './HomePageUserAccount/HomePageUserAccount';
 import { Routes, Route } from 'react-router-dom';
-import UserSensorStatistics from './UserSensorStatistics/UserSensorStatistics';
 import { Container, createTheme} from '@mui/material'
 import { ThemeProvider } from '@emotion/react';
 import SideBarComponent from './Diana/SensorHomePage/SideBarComponent/SideBarComponent';
 import { RoutinesPage } from './Deni/RoutinesPage/RoutinesPage';
 import SensorHomePage from './Diana/SensorHomePage/SensorHomePage';
 import LoginPage from './Crista/components/UserLoginPage';
+import AccountHomePage from './Maria/AccountHomePage/AccountHomePage';
 
 const mdTheme = createTheme();
 
@@ -28,6 +26,7 @@ function App() {
               <Route exact={true} path="/create-user" element={<CreateUserPage/>}/>
               <Route exact={true} path="/sensors" element={<SensorHomePage supabase={supabase}/>}/>
               <Route exact={true} path='/routines' element={<RoutinesPage supabase={supabase} userId={1}/>}/>
+              <Route exact={true} path='/account' element={<AccountHomePage/>}/>
             </Routes>
           </Container>
         </SideBarComponent> 
