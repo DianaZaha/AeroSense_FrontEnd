@@ -1,23 +1,46 @@
 import React from 'react';
 import { createClient } from '@supabase/supabase-js'
 import HomePage from './HomePageComponent/HomePage';
-import CreateAccount from './CreateAccountPageComponent/CreateAccount';
 import CreateUserPage from './Deni/CreateUserPage'
-import HomePageUserAccount from './HomePageUserAccount/HomePageUserAccount';
-import { Routes, Route } from 'react-router-dom';
-import UserSensorStatistics from './UserSensorStatistics/UserSensorStatistics';
+import { Routes, Route, Navigate } from 'react-router-dom';
 import { Container, createTheme} from '@mui/material'
 import { ThemeProvider } from '@emotion/react';
 import SideBarComponent from './Diana/SensorHomePage/SideBarComponent/SideBarComponent';
-import { RoutinesPage } from './Denisa/RoutinesPage/RoutinesPage';
+import { RoutinesPage } from './Deni/RoutinesPage/RoutinesPage';
 import SensorHomePage from './Diana/SensorHomePage/SensorHomePage';
 import StatisticsPageComponent from './Blue/StatisticsPageComponent/StatisticsPageComponent';
 import LoginPage from './Crista/components/UserLoginPage';
+import PremiumPage from './Deni/PremiumPage';
+import AccountHomePage from './Maria/AccountHomePage/AccountHomePage';
 
 const mdTheme = createTheme();
 
 function App() {
   const supabase = createClient("https://qniuxbcurrnrzyptvfej.supabase.co/", "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InFuaXV4YmN1cnJucnp5cHR2ZmVqIiwicm9sZSI6ImFub24iLCJpYXQiOjE3MDA5MjEyOTIsImV4cCI6MjAxNjQ5NzI5Mn0.m19rQ75BCpl_6iX-unkW3keao72D4po1olxds1YKeNo")
+
+  const PrivateRouteAdmin = ({ children }) => {
+    const authed = ( localStorage.getItem('role') === 'true');
+    if(authed)
+      return children;
+    else
+      return <Navigate to={"/"}/>
+  }
+
+  const PrivateRouteLogged = ({ children }) => {
+    const authed = localStorage.getItem('role');
+    if(authed)
+      return children;
+    else
+      return <Navigate to={"/"}/>
+  }
+
+  const PrivateRouteNotLogged = ({ children }) => {
+    const authed = localStorage.getItem('role');
+    if(!authed)
+      return children;
+    else
+      return <Navigate to={"/"}/>
+  }
 
   return (
     <ThemeProvider theme={mdTheme}>
@@ -25,11 +48,12 @@ function App() {
           <Container maxWidth='xl'>
             <Routes>
               <Route exact={true} path="/" element={<HomePage/>}/>
-              <Route exact={true} path="/login" element ={<LoginPage/>}/>
-              <Route exact={true} path="/create-user" element={<CreateUserPage/>}/>
-              <Route exact={true} path="/sensors" element={<SensorHomePage supabase={supabase}/>}/>
-              <Route exact={true} path='/routines' element={<RoutinesPage supabase={supabase}/>}/>
-              <Route exact={true} path="/statistics" element={<StatisticsPageComponent/>}/>
+              <Route exact={true} path="/login" element ={<PrivateRouteNotLogged><LoginPage supabase={supabase}/></PrivateRouteNotLogged>}/>
+              <Route exact={true} path="/create-user" element={<PrivateRouteNotLogged><CreateUserPage supabase={supabase}/></PrivateRouteNotLogged>}/>
+              <Route exact={true} path="/sensors" element={<PrivateRouteLogged><SensorHomePage supabase={supabase}/></PrivateRouteLogged>}/>
+              <Route exact={true} path='/routines' element={<PrivateRouteLogged><RoutinesPage supabase={supabase} userId={1}/></PrivateRouteLogged>}/>
+              <Route exact={true} path='/account' element={<PrivateRouteLogged><AccountHomePage/></PrivateRouteLogged>}/>
+              <Route exact={true} path="/statistics" element={<PrivateRouteAdmin><StatisticsPageComponent/></PrivateRouteAdmin>}/>
             </Routes>
           </Container>
         </SideBarComponent> 
@@ -38,3 +62,4 @@ function App() {
 }
 
 export default App;
+ 

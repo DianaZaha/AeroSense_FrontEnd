@@ -22,9 +22,10 @@ import ListItemText from '@mui/material/ListItemText';
 import SensorsIcon from '@mui/icons-material/Sensors';
 import AppSettingsAltIcon from '@mui/icons-material/AppSettingsAlt';
 import BarChartIcon from '@mui/icons-material/BarChart';
-import ManageAccountsIcon from '@mui/icons-material/ManageAccounts';
 import SettingsIcon from '@mui/icons-material/Settings';
-import AccountCircleIcon from '@mui/icons-material/AccountCircle';
+import LoginIcon from '@mui/icons-material/Login';
+import LogoutIcon from '@mui/icons-material/Logout';
+import HomeIcon from '@mui/icons-material/Home';
 
 const drawerWidth = 240;
 
@@ -139,7 +140,7 @@ export default function SideBarComponent({ children }) {
         </DrawerHeader>
         <Divider />
         <List>
-          <ListItem key={"SensorsPage"} disablePadding sx={{ display: 'block' }} component={Link} to={'/sensors'}>
+          <ListItem key={"HomePage"} disablePadding sx={{ display: 'block' }} component={Link} to={'/'}>
             <ListItemButton
               sx={{
                 minHeight: 48,
@@ -154,94 +155,150 @@ export default function SideBarComponent({ children }) {
                   justifyContent: 'center',
                 }}
               >
-                <SensorsIcon />
+                <HomeIcon />
               </ListItemIcon>
-              <ListItemText primary={"Sensors"} sx={{ opacity: open ? 1 : 0 }} />
+              <ListItemText primary={"Home"} sx={{ opacity: open ? 1 : 0 }} />
             </ListItemButton>
           </ListItem>
-          <ListItem key={"RoutinePage"} disablePadding sx={{ display: 'block' }} component={Link} to={'/routines'}>
-            <ListItemButton
-              sx={{
-                minHeight: 48,
-                justifyContent: open ? 'initial' : 'center',
-                px: 2.5,
-              }}
-            >
-              <ListItemIcon
+          {localStorage.getItem('role') &&
+            <ListItem key={"SensorsPage"} disablePadding sx={{ display: 'block' }} component={Link} to={'/sensors'}>
+              <ListItemButton
                 sx={{
-                  minWidth: 0,
-                  mr: open ? 3 : 'auto',
-                  justifyContent: 'center',
+                  minHeight: 48,
+                  justifyContent: open ? 'initial' : 'center',
+                  px: 2.5,
                 }}
               >
-                <AppSettingsAltIcon />
-              </ListItemIcon>
-              <ListItemText primary={"Routines"} sx={{ opacity: open ? 1 : 0 }} />
-            </ListItemButton>
-          </ListItem>
-          <ListItem key={"StatisticsPage"} disablePadding sx={{ display: 'block' }} component={Link} to={'/statistics'}>
-            <ListItemButton
-              sx={{
-                minHeight: 48,
-                justifyContent: open ? 'initial' : 'center',
-                px: 2.5,
-              }}
-            >
-              <ListItemIcon
+                <ListItemIcon
+                  sx={{
+                    minWidth: 0,
+                    mr: open ? 3 : 'auto',
+                    justifyContent: 'center',
+                  }}
+                >
+                  <SensorsIcon />
+                </ListItemIcon>
+                <ListItemText primary={"Sensors"} sx={{ opacity: open ? 1 : 0 }} />
+              </ListItemButton>
+            </ListItem>
+          }
+          {localStorage.getItem('role') &&
+            <ListItem key={"RoutinePage"} disablePadding sx={{ display: 'block' }} component={Link} to={'/routines'}>
+              <ListItemButton
                 sx={{
-                  minWidth: 0,
-                  mr: open ? 3 : 'auto',
-                  justifyContent: 'center',
+                  minHeight: 48,
+                  justifyContent: open ? 'initial' : 'center',
+                  px: 2.5,
                 }}
               >
-                <BarChartIcon />
-              </ListItemIcon>
-              <ListItemText primary={"Overall Statistics"} sx={{ opacity: open ? 1 : 0 }} />
-            </ListItemButton>
-          </ListItem>
+                <ListItemIcon
+                  sx={{
+                    minWidth: 0,
+                    mr: open ? 3 : 'auto',
+                    justifyContent: 'center',
+                  }}
+                >
+                  <AppSettingsAltIcon />
+                </ListItemIcon>
+                <ListItemText primary={"Routines"} sx={{ opacity: open ? 1 : 0 }} />
+              </ListItemButton>
+            </ListItem>
+          }
+          {localStorage.getItem('role') === 'true' &&
+            <ListItem key={"StatisticsPage"} disablePadding sx={{ display: 'block' }} component={Link} to={'/statistics'}>
+              <ListItemButton
+                sx={{
+                  minHeight: 48,
+                  justifyContent: open ? 'initial' : 'center',
+                  px: 2.5,
+                }}
+              >
+                <ListItemIcon
+                  sx={{
+                    minWidth: 0,
+                    mr: open ? 3 : 'auto',
+                    justifyContent: 'center',
+                  }}
+                >
+                  <BarChartIcon />
+                </ListItemIcon>
+                <ListItemText primary={"Overall Statistics"} sx={{ opacity: open ? 1 : 0 }} />
+              </ListItemButton>
+            </ListItem>
+          }
         </List>
         <Divider />
         <List>
-          <ListItem key={"AccountPage"} disablePadding sx={{ display: 'block' }} component={Link} to={'/user'}>
-            <ListItemButton
-              sx={{
-                minHeight: 48,
-                justifyContent: open ? 'initial' : 'center',
-                px: 2.5,
-              }}
-            >
-              <ListItemIcon
+          {localStorage.getItem('role') &&
+            <ListItem key={"AccountPage"} disablePadding sx={{ display: 'block' }} component={Link} to={'/account'}>
+              <ListItemButton
                 sx={{
-                  minWidth: 0,
-                  mr: open ? 3 : 'auto',
-                  justifyContent: 'center',
+                  minHeight: 48,
+                  justifyContent: open ? 'initial' : 'center',
+                  px: 2.5,
                 }}
               >
-                <SettingsIcon/>
-              </ListItemIcon>
-              <ListItemText primary={"Account"} sx={{ opacity: open ? 1 : 0 }} />
-            </ListItemButton>
-          </ListItem>
-          <ListItem key={"Login"} disablePadding sx={{ display: 'block' }} component={Link} to={'/login'}>
-            <ListItemButton
-              sx={{
-                minHeight: 48,
-                justifyContent: open ? 'initial' : 'center',
-                px: 2.5,
-              }}
-            >
-              <ListItemIcon
+                <ListItemIcon
+                  sx={{
+                    minWidth: 0,
+                    mr: open ? 3 : 'auto',
+                    justifyContent: 'center',
+                  }}
+                >
+                  <SettingsIcon/>
+                </ListItemIcon>
+                <ListItemText primary={"Account"} sx={{ opacity: open ? 1 : 0 }} />
+              </ListItemButton>
+            </ListItem>
+          }
+          {localStorage.getItem('role') === null &&
+            <ListItem key={"Login"} disablePadding sx={{ display: 'block' }} component={Link} to={'/login'}>
+              <ListItemButton
                 sx={{
-                  minWidth: 0,
-                  mr: open ? 3 : 'auto',
-                  justifyContent: 'center',
+                  minHeight: 48,
+                  justifyContent: open ? 'initial' : 'center',
+                  px: 2.5,
                 }}
               >
-                <AccountCircleIcon />
-              </ListItemIcon>
-              <ListItemText primary={"Login"} sx={{ opacity: open ? 1 : 0 }} />
-            </ListItemButton>
-          </ListItem>
+                <ListItemIcon
+                  sx={{
+                    minWidth: 0,
+                    mr: open ? 3 : 'auto',
+                    justifyContent: 'center',
+                  }}
+                >
+                  <LoginIcon />
+                </ListItemIcon>
+                <ListItemText primary={"Login"} sx={{ opacity: open ? 1 : 0 }} />
+              </ListItemButton>
+            </ListItem>
+          }
+          {localStorage.getItem('role') !== null &&
+            <ListItem key={"Login"} disablePadding sx={{ display: 'block' }} component={Link} to={'/'}>
+              <ListItemButton
+                sx={{
+                  minHeight: 48,
+                  justifyContent: open ? 'initial' : 'center',
+                  px: 2.5,
+                }}
+                onClick={() => {
+                  localStorage.removeItem('role');
+                  window.location.reload(false);
+                }}
+              >
+                <ListItemIcon
+                  sx={{
+                    minWidth: 0,
+                    mr: open ? 3 : 'auto',
+                    justifyContent: 'center',
+                  }}
+                >
+                  <LogoutIcon />
+                </ListItemIcon>
+                <ListItemText primary={"Log out"} sx={{ opacity: open ? 1 : 0 }} />
+              </ListItemButton>
+            </ListItem>
+          }
         </List>
       </Drawer>
       <Box component="main" sx={{ flexGrow: 1, p: 3 }}>
