@@ -9,7 +9,7 @@ import UserSensorStatistics from './UserSensorStatistics/UserSensorStatistics';
 import { Container, createTheme} from '@mui/material'
 import { ThemeProvider } from '@emotion/react';
 import SideBarComponent from './Diana/SensorHomePage/SideBarComponent/SideBarComponent';
-import { RoutinesPage } from './Denisa/RoutinesPage/RoutinesPage';
+import { RoutinesPage } from './Deni/RoutinesPage/RoutinesPage';
 import SensorHomePage from './Diana/SensorHomePage/SensorHomePage';
 import LoginPage from './Crista/components/UserLoginPage';
 
