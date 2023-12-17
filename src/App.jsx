@@ -2,6 +2,7 @@ import React from 'react';
 import { createClient } from '@supabase/supabase-js'
 import HomePage from './HomePageComponent/HomePage';
 import CreateAccount from './CreateAccountPageComponent/CreateAccount';
+import CreateUserPage from './Deni/CreateUserPage'
 import HomePageUserAccount from './HomePageUserAccount/HomePageUserAccount';
 import { Routes, Route } from 'react-router-dom';
 import UserSensorStatistics from './UserSensorStatistics/UserSensorStatistics';
@@ -11,6 +12,7 @@ import SideBarComponent from './Diana/SensorHomePage/SideBarComponent/SideBarCom
 import { RoutinesPage } from './Denisa/RoutinesPage/RoutinesPage';
 import SensorHomePage from './Diana/SensorHomePage/SensorHomePage';
 import StatisticsPageComponent from './Blue/StatisticsPageComponent/StatisticsPageComponent';
+import LoginPage from './Crista/components/UserLoginPage';
 
 const mdTheme = createTheme();
 
@@ -23,9 +25,8 @@ function App() {
           <Container maxWidth='xl'>
             <Routes>
               <Route exact={true} path="/" element={<HomePage/>}/>
-              <Route exact={true} path="/user" element={<HomePageUserAccount/>}/>
-              <Route exact={true} path="/create" element={<CreateAccount/>}/>
-              <Route exact={true} path="/sensor" element={<UserSensorStatistics/>}/>
+              <Route exact={true} path="/login" element ={<LoginPage/>}/>
+              <Route exact={true} path="/create-user" element={<CreateUserPage/>}/>
               <Route exact={true} path="/sensors" element={<SensorHomePage supabase={supabase}/>}/>
               <Route exact={true} path='/routines' element={<RoutinesPage supabase={supabase}/>}/>
               <Route exact={true} path="/statistics" element={<StatisticsPageComponent/>}/>
