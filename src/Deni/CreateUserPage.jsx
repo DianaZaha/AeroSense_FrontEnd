@@ -92,7 +92,7 @@ export default function CreateUserPage() {
 
             <FormGroup>
    
-            <FormControlLabel control={<Checkbox defaultChecked />} label="Go PREMIUM!" />
+            <FormControlLabel control={<Checkbox default />} label="Go PREMIUM!" />
              {/* <FormControlLabel required control={<Checkbox />} label="Required" />
              <FormControlLabel disabled control={<Checkbox />} label="Disabled" /> */}
        

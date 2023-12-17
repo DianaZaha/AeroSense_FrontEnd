@@ -23,11 +23,8 @@ function App() {
         <SideBarComponent>
           <Container maxWidth='xl'>
             <Routes>
-              <Route exact={true} path="/login" element ={<LoginPage/>}/>
               <Route exact={true} path="/" element={<HomePage/>}/>
-              <Route exact={true} path="/user" element={<HomePageUserAccount/>}/>
-              <Route exact={true} path="/create" element={<CreateAccount/>}/>
-              <Route exact={true} path="/sensor" element={<UserSensorStatistics/>}/>
+              <Route exact={true} path="/login" element ={<LoginPage/>}/>
               <Route exact={true} path="/create-user" element={<CreateUserPage/>}/>
               <Route exact={true} path="/sensors" element={<SensorHomePage supabase={supabase}/>}/>
               <Route exact={true} path='/routines' element={<RoutinesPage supabase={supabase}/>}/>
