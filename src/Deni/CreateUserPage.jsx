@@ -43,6 +43,7 @@ export default function CreateUserPage({supabase}) {
     event.preventDefault();
     const formData = new FormData(event.currentTarget);
     if(
+      formData.get('name').length === 0 ||
       formData.get('email').length === 0 ||
       formData.get('password').length === 0 ||
       formData.get('phone_number').length === 0 ||
@@ -54,6 +55,7 @@ export default function CreateUserPage({supabase}) {
 
     const { data, error } = await supabase.from('users').insert([
       {
+        name: formData.get('name'),
         email: formData.get('email'),
         password: formData.get('password'),
         phone_number: formData.get('phone_number'),
@@ -68,6 +70,7 @@ export default function CreateUserPage({supabase}) {
     }
 
     localStorage.setItem('role', data[0].admin);
+    localStorage.setItem('userId', data[0].id_user);
     window.location.reload(false);
   };
 
@@ -103,6 +106,15 @@ export default function CreateUserPage({supabase}) {
             Create User
           </Typography>
           <Box component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 1 }}>
+          <TextField
+              margin="normal"
+              required
+              fullWidth
+              id="name"
+              label="Name"
+              name="name"
+              autoFocus
+            />
             <TextField
               margin="normal"
               required

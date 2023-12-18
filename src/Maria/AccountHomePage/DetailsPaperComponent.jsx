@@ -40,26 +40,6 @@ export default function DetailsPaperComponent({Name, Password, Email, Phone, Add
                 />
             </ListItem>
             <Divider variant="inset" component="li" />
-
-            <ListItem alignItems="flex-start">
-                <ListItemText
-                primary="Password"
-                secondary={
-                    <React.Fragment>
-                    <Typography
-                        sx={{ display: 'inline' }}
-                        component="span"
-                        variant="body2"
-                        color="text.primary"
-                    >
-                    </Typography>
-                    {Password}
-                    </React.Fragment>
-                }
-                />
-            </ListItem>
-            <Divider variant="inset" component="li" />
-
             <ListItem alignItems="flex-start">
                 <ListItemText
                 primary="Email"
