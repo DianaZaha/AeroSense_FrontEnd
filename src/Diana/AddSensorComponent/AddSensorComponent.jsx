@@ -44,8 +44,7 @@ export default function AddSensorComponent({ UserID, RoomID, supabase, onClose, 
   }
 
   const postData = async (idSensor, idRoom) => {
-    // eslint-disable-next-line no-unused-vars
-    const { data, error } = await supabase.from('sensor').update({ id_room: idRoom}).eq('id_sensor', idSensor).single();
+    const { error } = await supabase.from('sensor').update({ id_room: idRoom}).eq('id_sensor', idSensor).single();
     console.log(error);
     if (error != null) {
       setAddSensorAlerState('error-database');

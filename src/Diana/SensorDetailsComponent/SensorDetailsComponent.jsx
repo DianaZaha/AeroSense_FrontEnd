@@ -1,4 +1,4 @@
-import { Typography, Box, Fab } from '@mui/material'
+import { Typography, Box, Fab, LinearProgress} from '@mui/material'
 import { styled } from '@mui/material/styles';
 import { React, useState, useEffect } from 'react'
 import {
@@ -117,6 +117,14 @@ export default function SensorDetailsComponent({ SensorName, ID, supabase, setDe
             setDeleteSensorAlerState('removed-successfully');  
         }
     };
+
+    if (preRender === 0) {
+        return <Box sx={{ display: 'flex', flexWrap: 'wrap', justifyContent: "center", flexDirection: 'row', p: 1, m: 1, }}>
+          <Box sx={{ display: 'flex', flexWrap: 'wrap', justifyContent: "center", flexDirection: 'column', p: 1, m: 1, }}>
+          <Typography>Loading data</Typography>
+          <LinearProgress />
+          </Box></Box>;
+    }
 
     return (
         <Box>

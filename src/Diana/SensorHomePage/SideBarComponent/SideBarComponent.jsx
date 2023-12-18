@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { styled, useTheme } from '@mui/material/styles';
 import {
-  Link as RouterLink,
+  Link as RouterLink, useNavigate
 } from 'react-router-dom';
 import Box from '@mui/material/Box';
 import MuiDrawer from '@mui/material/Drawer';
@@ -94,6 +94,7 @@ const Drawer = styled(MuiDrawer, { shouldForwardProp: (prop) => prop !== 'open' 
 );
 
 export default function SideBarComponent({ children }) {
+  const navigate = useNavigate();
   const Link = React.forwardRef(function Link(
     itemProps,
     ref,
@@ -283,6 +284,7 @@ export default function SideBarComponent({ children }) {
                 onClick={() => {
                   localStorage.removeItem('role');
                   window.location.reload(false);
+                  navigate("/");
                 }}
               >
                 <ListItemIcon

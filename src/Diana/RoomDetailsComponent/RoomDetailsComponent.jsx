@@ -115,8 +115,7 @@ export default function RoomDetailsComponent({ supabase, RoomId, RoomName, RoomD
 
 
     const deleteRoom = async (RoomId) => {
-        // eslint-disable-next-line no-unused-vars
-        const { data, error1 } = await supabase.from('sensor').update({ id_room: 'NULL' }).eq('id_room', RoomId).select();
+        const { error1 } = await supabase.from('sensor').update({ id_room: 'NULL' }).eq('id_room', RoomId).select();
         if (error1 != null)
             setDeleteAlerState('error-database');
         else {
@@ -146,8 +145,7 @@ export default function RoomDetailsComponent({ supabase, RoomId, RoomName, RoomD
         const { data: rooms } = await supabase.from('room').select('name').eq('name', NewRoomName);
 
         if ((rooms.length === 0 && changeName) || !changeName) {
-            // eslint-disable-next-line no-unused-vars
-            const { data, error } = await supabase.from('room').update({ id_room: id, description: NewRoomDescription, name: NewRoomName }).eq('id_room', id).single();
+            const { error } = await supabase.from('room').update({ id_room: id, description: NewRoomDescription, name: NewRoomName }).eq('id_room', id).single();
             console.log(error);
             if (error != null) {
                 setModifyRoomAlert('error-database');
