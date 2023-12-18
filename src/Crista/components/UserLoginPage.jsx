@@ -61,6 +61,7 @@ export default function SignInSide({supabase}) {
     }
 
     localStorage.setItem('role', data[0].admin);
+    localStorage.setItem('userId', data[0].id_user);
     window.location.reload(false);
   };
 

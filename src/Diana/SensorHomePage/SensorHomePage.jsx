@@ -20,7 +20,7 @@ const style = {
     p: 4,
 };
 
-export default function SensorHomePage({ supabase }) {
+export default function SensorHomePage({ supabase, userId }) {
     const [Rooms, setRooms] = useState([]);
     const [unallocatedSensors, SetUnallocatedSensors] = useState([]);
     const [preRender, setPrerender] = useState(0);
@@ -34,12 +34,12 @@ export default function SensorHomePage({ supabase }) {
     const handleCloseNewRoom = () => setOpenNewRoom(false);
 
     async function fetchRooms() {
-        const { data: FetchedRooms, error } = await supabase.from('room').select('*').eq('id_user', 1);
+        const { data: FetchedRooms, error } = await supabase.from('room').select('*').eq('id_user', userId);
         if (error != null)
             setRooms([]);
         else
             setRooms(FetchedRooms);
-        const { data: FetchedSensors, error1 } = await supabase.from('sensor').select('*').eq('id_user', 1).is('id_room', null);
+        const { data: FetchedSensors, error1 } = await supabase.from('sensor').select('*').eq('id_user', userId).is('id_room', null);
         if (error1 != null)
             SetUnallocatedSensors([]);
         else {
@@ -116,6 +116,7 @@ export default function SensorHomePage({ supabase }) {
                     <Box key={element.id_room} sx={{ paddingY: '0.5%' }}>
                         <RoomCard
                             supabase={supabase}
+                            UserID={userId}
                             Name={element.name}
                             Description={element.description}
                             RoomId={element.id_room}
@@ -130,7 +131,7 @@ export default function SensorHomePage({ supabase }) {
             <UnallocatedSensorsCard unallocatedList={unallocatedSensors} supabase={supabase}/>
             <Modal open={openNewRoom} onClose={handleCloseNewRoom} >
                 <Box sx={style}>
-                    <AddRoomComponent UserID={1} supabase={supabase} onClose={handleCloseNewRoom} setAddRoomAlerState={setAddRoomAlerState} />
+                    <AddRoomComponent UserID={userId} supabase={supabase} onClose={handleCloseNewRoom} setAddRoomAlerState={setAddRoomAlerState} />
                 </Box>
             </Modal>
             <AlertAddRoom addRoomStatus={addRoomStatus} open={openSnackBar} setSnackBarOpen={setSnackBarOpen} />
