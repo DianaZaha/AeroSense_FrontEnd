@@ -32,7 +32,6 @@ function App() {
     if(authed)
       return children;
     else{
-      console.log('redirect');
       return <Navigate to={"/home"}/>
     }
   }
