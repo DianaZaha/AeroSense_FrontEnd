@@ -1,7 +1,7 @@
 import React from 'react';
 import { createClient } from '@supabase/supabase-js'
 import CreateUserPage from './Deni/CreateUserPage'
-import { Routes, Route, Navigate } from 'react-router-dom';
+import { Routes, Route, useNavigate } from 'react-router-dom';
 import { Container, createTheme} from '@mui/material'
 import { ThemeProvider } from '@emotion/react';
 import SideBarComponent from './Diana/SensorHomePage/SideBarComponent/SideBarComponent';
@@ -18,13 +18,14 @@ const mdTheme = createTheme();
 function App() {
   const supabase = createClient("https://qniuxbcurrnrzyptvfej.supabase.co/", "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InFuaXV4YmN1cnJucnp5cHR2ZmVqIiwicm9sZSI6ImFub24iLCJpYXQiOjE3MDA5MjEyOTIsImV4cCI6MjAxNjQ5NzI5Mn0.m19rQ75BCpl_6iX-unkW3keao72D4po1olxds1YKeNo");
   const userId = localStorage.getItem('userId');
+  const navigate = useNavigate();
 
   const PrivateRouteAdmin = ({ children }) => {
     const authed = ( localStorage.getItem('role') === 'true');
     if(authed)
       return children;
     else
-      return <Navigate to={"/home"}/>
+      return navigate("/");
   }
 
   const PrivateRouteLogged = ({ children }) => {
@@ -32,7 +33,7 @@ function App() {
     if(authed)
       return children;
     else{
-      return <Navigate to={"/home"}/>
+      return navigate("/");
     }
   }
 
@@ -41,7 +42,7 @@ function App() {
     if(!authed)
       return children;
     else
-      return <Navigate to={"/home"}/>
+      return navigate("/");
   }
 
   return (
