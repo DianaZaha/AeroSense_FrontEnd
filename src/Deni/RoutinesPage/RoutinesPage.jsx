@@ -86,6 +86,7 @@ export function RoutinesPage({ supabase, userId }) {
     }
     useEffect(() => {
         fetchRoutines();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
     function openRoutineDetails(routineId) {

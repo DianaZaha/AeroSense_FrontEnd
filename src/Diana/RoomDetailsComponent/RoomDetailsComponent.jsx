@@ -107,6 +107,7 @@ export default function RoomDetailsComponent({ supabase, RoomId, RoomName, RoomD
         setOpenSnackBar(true);
         setUpdateRoomStatus(val);
         fetchRooms();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
 

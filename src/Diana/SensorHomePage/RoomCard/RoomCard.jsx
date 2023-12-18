@@ -6,7 +6,7 @@ import RoomDetailsComponent from '../../RoomDetailsComponent/RoomDetailsComponen
 import AddSensorComponent from '../../AddSensorComponent/AddSensorComponent';
 import SensorCard from '../SensorCard/SensorCard';
 
-export default function RoomCard({ supabase, Name, Description, RoomId, setAddSensorAlerState, setDeleteAlerState, setDeleteSensorAlerState, fetchRooms }) {
+export default function RoomCard({ supabase, Name, Description, UserID, RoomId, setAddSensorAlerState, setDeleteAlerState, setDeleteSensorAlerState, fetchRooms }) {
   const [sensorList, setSensorList] = useState([]);
   const [preRender, setPrerender] = useState(0);
 
@@ -43,6 +43,7 @@ export default function RoomCard({ supabase, Name, Description, RoomId, setAddSe
   }
   const getSensorList = useCallback(() => {
     fetchMachines();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   if (preRender === 0) {
@@ -53,11 +54,13 @@ export default function RoomCard({ supabase, Name, Description, RoomId, setAddSe
   const setDelSensAl = useCallback((val)=>{
     fetchMachines();
     setDeleteSensorAlerState(val);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const setAddSensorAlerStateRoomCard = useCallback((val) => {
     fetchMachines();
     setAddSensorAlerState(val);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
 }, []);
 
   return (
@@ -91,7 +94,7 @@ export default function RoomCard({ supabase, Name, Description, RoomId, setAddSe
       <CardActions>
       <Modal open={addSensorOpen} onClose={handleCloseNewSensor} >
                 <Box sx={style1}>
-                    <AddSensorComponent UserID={1} RoomID={RoomId} supabase={supabase} 
+                    <AddSensorComponent UserID={UserID} RoomID={RoomId} supabase={supabase} 
                     onClose={handleCloseNewSensor} setAddSensorAlerState={setAddSensorAlerStateRoomCard} />
                 </Box>
             </Modal>

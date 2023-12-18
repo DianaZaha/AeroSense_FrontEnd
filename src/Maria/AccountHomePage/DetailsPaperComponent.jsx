@@ -5,8 +5,6 @@ import ListItem from '@mui/material/ListItem';
 import ListItemText from '@mui/material/ListItemText';
 import styled from '@emotion/styled';
 import Paper from '@mui/material/Paper';
-import Container from '@mui/material/Container';
-import Box from '@mui/material/Box';
 
 const DetailsPaper = styled(Paper)(({ theme }) => ({
   width: 800,
@@ -40,26 +38,6 @@ export default function DetailsPaperComponent({Name, Password, Email, Phone, Add
                 />
             </ListItem>
             <Divider variant="inset" component="li" />
-
-            <ListItem alignItems="flex-start">
-                <ListItemText
-                primary="Password"
-                secondary={
-                    <React.Fragment>
-                    <Typography
-                        sx={{ display: 'inline' }}
-                        component="span"
-                        variant="body2"
-                        color="text.primary"
-                    >
-                    </Typography>
-                    {Password}
-                    </React.Fragment>
-                }
-                />
-            </ListItem>
-            <Divider variant="inset" component="li" />
-
             <ListItem alignItems="flex-start">
                 <ListItemText
                 primary="Email"

@@ -16,7 +16,8 @@ import Footer from './Teo/FooterComponent/Footer';
 const mdTheme = createTheme();
 
 function App() {
-  const supabase = createClient("https://qniuxbcurrnrzyptvfej.supabase.co/", "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InFuaXV4YmN1cnJucnp5cHR2ZmVqIiwicm9sZSI6ImFub24iLCJpYXQiOjE3MDA5MjEyOTIsImV4cCI6MjAxNjQ5NzI5Mn0.m19rQ75BCpl_6iX-unkW3keao72D4po1olxds1YKeNo")
+  const supabase = createClient("https://qniuxbcurrnrzyptvfej.supabase.co/", "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InFuaXV4YmN1cnJucnp5cHR2ZmVqIiwicm9sZSI6ImFub24iLCJpYXQiOjE3MDA5MjEyOTIsImV4cCI6MjAxNjQ5NzI5Mn0.m19rQ75BCpl_6iX-unkW3keao72D4po1olxds1YKeNo");
+  const userId = localStorage.getItem('userId');
 
   const PrivateRouteAdmin = ({ children }) => {
     const authed = ( localStorage.getItem('role') === 'true');
@@ -50,10 +51,10 @@ function App() {
               <Route exact={true} path="/" element={<FrontPage />}/>
               <Route exact={true} path="/login" element ={<PrivateRouteNotLogged><LoginPage supabase={supabase}/></PrivateRouteNotLogged>}/>
               <Route exact={true} path="/create-user" element={<PrivateRouteNotLogged><CreateUserPage supabase={supabase}/></PrivateRouteNotLogged>}/>
-              <Route exact={true} path="/sensors" element={<PrivateRouteLogged><SensorHomePage supabase={supabase}/></PrivateRouteLogged>}/>
-              <Route exact={true} path='/routines' element={<PrivateRouteLogged><RoutinesPage supabase={supabase} userId={1}/></PrivateRouteLogged>}/>
-              <Route exact={true} path='/account' element={<PrivateRouteLogged><AccountHomePage/></PrivateRouteLogged>}/>
-              <Route exact={true} path="/statistics" element={<PrivateRouteAdmin><StatisticsPageComponent supabase={supabase} userId={1}/></PrivateRouteAdmin>}/>
+              <Route exact={true} path="/sensors" element={<PrivateRouteLogged><SensorHomePage supabase={supabase} userId={userId}/></PrivateRouteLogged>}/>
+              <Route exact={true} path='/routines' element={<PrivateRouteLogged><RoutinesPage supabase={supabase} userId={userId}/></PrivateRouteLogged>}/>
+              <Route exact={true} path='/account' element={<PrivateRouteLogged><AccountHomePage supabase={supabase} userId={userId}/></PrivateRouteLogged>}/>
+              <Route exact={true} path="/statistics" element={<PrivateRouteAdmin><StatisticsPageComponent supabase={supabase} userId={userId}/></PrivateRouteAdmin>}/>
             </Routes>
             <Footer/>
             </Container>

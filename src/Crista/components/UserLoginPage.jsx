@@ -13,7 +13,7 @@ import Typography from '@mui/material/Typography';
 import { Collapse, Alert, Modal } from '@mui/material';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
-import { Link as RouterLink, Navigate } from 'react-router-dom';
+import { Link as RouterLink } from 'react-router-dom';
 
 
 function Copyright(props) {
@@ -61,6 +61,7 @@ export default function SignInSide({supabase}) {
     }
 
     localStorage.setItem('role', data[0].admin);
+    localStorage.setItem('userId', data[0].id_user);
     window.location.reload(false);
   };
 

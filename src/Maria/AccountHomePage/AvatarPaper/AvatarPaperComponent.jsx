@@ -22,31 +22,9 @@ const AvatarPaperStyle = styled(Paper)(({ theme }) => ({
     textAlign: 'center',
   }));
 
-export default function AvatarPaperComponent({Name, UserType}) {
-
-    const style = {
-        position: 'absolute',
-        top: '50%',
-        left: '50%',
-        transform: 'translate(-50%, -50%)',
-        width: 700,
-        height: 480,
-        bgcolor: 'background.paper',
-        border: '2px solid #000',
-        boxShadow: 24,
-        p: 4,
-    };
-
-    const [password, setPassword] = React.useState("");
-    const [showPassword, setShowPassword] = React.useState(false);
-
-    const handleClickShowPassword = () => {
-        setShowPassword((showPassword) => !showPassword);
-      } 
-
-      const handleMouseDownPassword = (event) => {
-            event.preventDefault();
-      };
+export default function AvatarPaperComponent({supabase, user, UserType, setUser}) {
+    const accountType = UserType ? "Premium" : "Standard";
+    const [, setPassword] = React.useState("");
 
       const [open, setOpen] = React.useState(false);
       const handleOpen = () => setOpen(true);
@@ -79,11 +57,11 @@ export default function AvatarPaperComponent({Name, UserType}) {
         <Typography color={'#09ba73'}>
             <h1>
                 <b>
-                    {Name}
+                    {user.name}
                 </b>
             </h1>
             <h3>
-                    Type of user: {UserType}
+                    Type of user: {accountType}
             </h3>
         </Typography>
 
@@ -111,7 +89,7 @@ export default function AvatarPaperComponent({Name, UserType}) {
                         aria-labelledby="modal-modal-title"
                         aria-describedby="modal-modal-description"
                         >
-                            <Box sx={{ paddingY:'0.5%'}}> <EditProfileComponent/></Box>
+                            <Box sx={{ paddingY:'0.5%'}}> <EditProfileComponent supabase={supabase} user={user} handleClose={handleClose} setUser={setUser}/></Box>
 
                         </Modal>
                     </CardActions>

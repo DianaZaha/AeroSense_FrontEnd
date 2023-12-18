@@ -1,5 +1,5 @@
-import { Box } from '@mui/material'
-import React from 'react'
+import { Box, Snackbar } from '@mui/material'
+import React, { useState } from 'react'
 import Input from '@mui/material/Input';
 import InputLabel from '@mui/material/InputLabel';
 import FormControl from '@mui/material/FormControl';
@@ -9,18 +9,28 @@ import TextField from '@mui/material/TextField';
 import AccountCircle from '@mui/icons-material/AccountCircle';
 import EmailIcon from '@mui/icons-material/Email';
 import LocalPhoneIcon from '@mui/icons-material/LocalPhone';
-import PhoneAndroidIcon from '@mui/icons-material/PhoneAndroid';
 import LocationOnIcon from '@mui/icons-material/LocationOn';
 import InputAdornment from '@mui/material/InputAdornment';
 import PasswordIcon from '@mui/icons-material/Password';
 import IconButton from '@mui/material/IconButton';
 import Container from '@mui/material/Container';
 import Button from '@mui/material/Button';
+import Alert from '@mui/material/Button';
 
-export default function EditProfileComponent() {
+export default function EditProfileComponent({supabase, user, handleClose, setUser}) {
+    const defaultUser = user;
+    const [changedUser, setChangedUser] = useState(user);
 
-    const [password, setPassword] = React.useState("");
     const [showPassword, setShowPassword] = React.useState(false);
+    const [openAlert, setAlertOpen] = useState(false);
+
+    const handleCloseAlert = (event, reason) => {
+		if (reason === 'clickaway') {
+		return;
+		}
+
+		setAlertOpen(false);
+	};
 
     const handleClickShowPassword = () => {
         setShowPassword((showPassword) => !showPassword);
@@ -29,13 +39,6 @@ export default function EditProfileComponent() {
       const handleMouseDownPassword = (event) => {
             event.preventDefault();
       };
-
-      const [open, setOpen] = React.useState(false);
-      const handleOpen = () => setOpen(true);
-      const handleClose = () => {
-        setOpen(false);
-        setPassword('');
-      } 
 
       const style = {
         position: 'absolute',
@@ -50,14 +53,44 @@ export default function EditProfileComponent() {
         p: 4,
     };
 
+    const onChangeProperty = (property, value) => {
+		setChangedUser({
+			...changedUser,
+			[property]: value
+		});
+	};
+
+    async function submitChange() {
+        if (changedUser.name.length === 0 ||
+            changedUser.password.length === 0 ||
+            changedUser.email.length === 0 ||
+            changedUser.phone_number.length === 0 ||
+            changedUser.address.length === 0
+        ) {
+            setAlertOpen(true);
+			return;
+        }
+
+        const { data } = await supabase.from('users').update({
+            name: changedUser.name,
+            email: changedUser.email,
+            password: changedUser.password,
+            phone_number: changedUser.phone_number,
+            address: changedUser.address,
+            admin: changedUser.admin
+        }).eq("id_user", changedUser.id_user).select();
+
+        setUser(data[0]);
+        handleClose();
+    }
+
     return(
     <>
         <Container>
-
             <Box sx={ style }>
                 <Box sx={{ display: 'flex', alignItems: 'flex-end' }}>
                     <AccountCircle sx={{ color: 'action.active', mr: 1, my: 0 }} />
-                    <TextField fullWidth label="Full Name" variant="standard" />
+                    <TextField fullWidth label="Full Name" variant="standard" value={changedUser.name} onChange={e => onChangeProperty("name", e.target.value)}/>
                 </Box>
 
                 <Box sx={{ display: 'flex', flexWrap: 'wrap', alignItems: "flex-end" }}>
@@ -67,9 +100,8 @@ export default function EditProfileComponent() {
                         <Input
                             id="standard-adornment-password"
                             type={showPassword ? 'text' : 'password'}
-                            key={password}
-                            value={password}
-                            onChange={e => setPassword(e.target.value)}
+                            key={changedUser.password}
+                            value={changedUser.password} onChange={e => onChangeProperty("password", e.target.value)}
                             endAdornment={
                             <InputAdornment position="end">
                                 <IconButton
@@ -88,27 +120,32 @@ export default function EditProfileComponent() {
 
                 <Box sx={{ display: 'flex', alignItems: 'flex-end' }}>
                     <EmailIcon sx={{ color: 'action.active', mr: 1, my: 0 }} />
-                    <TextField fullWidth label="Email" variant="standard" />
+                    <TextField fullWidth label="Email" variant="standard" value={changedUser.email} onChange={e => onChangeProperty("email", e.target.value)}/>
                 </Box>
 
                 <Box sx={{ display: 'flex', alignItems: 'flex-end' }}>
                     <LocalPhoneIcon sx={{ color: 'action.active', mr: 1, my: 0 }} />
-                    <TextField fullWidth label="Phone" variant="standard" />
+                    <TextField fullWidth label="Phone" variant="standard" value={changedUser.phone_number} onChange={e => onChangeProperty("phone_number", e.target.value)}/>
                 </Box>
 
                 <Box sx={{ display: 'flex', alignItems: 'flex-end' }}>
                     <LocationOnIcon sx={{ color: 'action.active', mr: 1, my: 0 }} />
-                    <TextField fullWidth label="Address" variant="standard" />
+                    <TextField fullWidth label="Address" variant="standard" value={changedUser.address} onChange={e => onChangeProperty("address", e.target.value)}/>
                 </Box>
 
                 <Box display="flex" justifyContent="center" alignItems="center" sx={{ paddingY: '10%' }}>
-                    <Button variant="contained" color="success">
+                    <Button variant="contained" color="success" disabled={JSON.stringify(defaultUser) === JSON.stringify(changedUser)}
+                        onClick={submitChange}
+                    >
                         Save changes
                     </Button>
+                    <Snackbar open={openAlert} autoHideDuration={6000} onClose={handleCloseAlert} sx={{ color: 'red' }}>
+                        <Alert onClose={handleCloseAlert} severity='error' sx={{ width: '100%' }}>
+                            One or more fields are empty!
+                        </Alert>
+                    </Snackbar>
                 </Box>
-
             </Box>
-
         </Container>
     </>
     )
