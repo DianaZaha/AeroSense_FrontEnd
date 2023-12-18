@@ -1,6 +1,6 @@
 import { Typography, Box, Fab } from '@mui/material'
 import { styled } from '@mui/material/styles';
-import { React, useState, useCallback, useEffect } from 'react'
+import { React, useState, useEffect } from 'react'
 import {
     DataGrid,
     GridToolbarContainer,
@@ -80,12 +80,6 @@ export default function SensorDetailsComponent({ SensorName, ID, supabase, setDe
         else setFetchedTVOC(tvoc[0].value);
     }
 
-    const getRowStyle = params => {
-        if (params.node.rowIndex % 2 === 0) {
-            return { background: 'red' };
-        }
-    };
-
     useEffect(() => {
         async function fetchData() {
             setPrerender(0);
@@ -106,6 +100,7 @@ export default function SensorDetailsComponent({ SensorName, ID, supabase, setDe
         }
 
         fetchData();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [ID, fetchedLight, fetchedSound, fetchedTemp, fetchedHumidity, fetchedCO2, fetchedTVOC]);
 
 
@@ -115,7 +110,7 @@ export default function SensorDetailsComponent({ SensorName, ID, supabase, setDe
     }
 
     const deleteSensor= async (IdSensor) => {
-        const { data, error } = await supabase.from('sensor').update({ id_room: null }).eq('id_sensor', IdSensor).single();
+        const { error } = await supabase.from('sensor').update({ id_room: null }).eq('id_sensor', IdSensor).single();
         if (error != null)
             setDeleteSensorAlerState('error-database');
         else {

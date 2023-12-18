@@ -46,11 +46,12 @@ export default function RoomDetailsComponent({ supabase, RoomId, RoomName, RoomD
         setPrerender(-1);
         fetchRooms();
         fetchMachines();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
 
     async function removeSensor(IdSensor) {
-        const { data, error } = await supabase.from('sensor').update({ id_room: null }).eq('id_sensor', IdSensor).single();
+        const { error } = await supabase.from('sensor').update({ id_room: null }).eq('id_sensor', IdSensor).single();
         if(error !== null){
             setRemoveSensor('error-database');
         }
@@ -79,6 +80,7 @@ export default function RoomDetailsComponent({ supabase, RoomId, RoomName, RoomD
                 }
                 // Update the state with the fetched data
                 let list = [];
+                // eslint-disable-next-line array-callback-return
                 sensorList.map(element => { list.push({ id: element.id_sensor, SensorName: element.name }) })
                 setSensorsGridRows(list);
                 setPrerender(1);
@@ -88,6 +90,7 @@ export default function RoomDetailsComponent({ supabase, RoomId, RoomName, RoomD
         }
 
         fetchData();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [RoomId,preRender]);
 
     const setSnackBarOpen = useCallback((value) => {
@@ -107,10 +110,12 @@ export default function RoomDetailsComponent({ supabase, RoomId, RoomName, RoomD
         setOpenSnackBar(true);
         setUpdateRoomStatus(val);
         fetchRooms();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
 
     const deleteRoom = async (RoomId) => {
+        // eslint-disable-next-line no-unused-vars
         const { data, error1 } = await supabase.from('sensor').update({ id_room: 'NULL' }).eq('id_room', RoomId).select();
         if (error1 != null)
             setDeleteAlerState('error-database');
@@ -135,12 +140,13 @@ export default function RoomDetailsComponent({ supabase, RoomId, RoomName, RoomD
 
     const updateRoomData = async (id, NewRoomDescription, NewRoomName) => {
         let changeName = false;
-        if (NewRoomName != roomName) {
+        if (NewRoomName !== roomName) {
             changeName = true;
         }
-        const { data: rooms, error1 } = await supabase.from('room').select('name').eq('name', NewRoomName);
+        const { data: rooms } = await supabase.from('room').select('name').eq('name', NewRoomName);
 
-        if ((rooms.length == 0 && changeName) || !changeName) {
+        if ((rooms.length === 0 && changeName) || !changeName) {
+            // eslint-disable-next-line no-unused-vars
             const { data, error } = await supabase.from('room').update({ id_room: id, description: NewRoomDescription, name: NewRoomName }).eq('id_room', id).single();
             console.log(error);
             if (error != null) {

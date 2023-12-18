@@ -24,16 +24,7 @@ const AvatarPaperStyle = styled(Paper)(({ theme }) => ({
 
 export default function AvatarPaperComponent({supabase, user, UserType, setUser}) {
     const accountType = UserType ? "Premium" : "Standard";
-    const [password, setPassword] = React.useState("");
-    const [showPassword, setShowPassword] = React.useState(false);
-
-    const handleClickShowPassword = () => {
-        setShowPassword((showPassword) => !showPassword);
-      } 
-
-      const handleMouseDownPassword = (event) => {
-            event.preventDefault();
-      };
+    const [, setPassword] = React.useState("");
 
       const [open, setOpen] = React.useState(false);
       const handleOpen = () => setOpen(true);

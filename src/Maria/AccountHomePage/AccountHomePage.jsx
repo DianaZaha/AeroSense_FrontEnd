@@ -17,7 +17,7 @@ export default function AccountHomePage({supabase, userId}) {
             setUser(user);
             setLoading(false);
         })
-    }, []);
+    }, [supabase, userId]);
 
     return (
         <>

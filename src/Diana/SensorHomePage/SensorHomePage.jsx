@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useCallback } from 'react';
-import { Box, IconButton, Fab, Modal, Typography, Container, Alert, Snackbar } from '@mui/material'
+import { Box, Fab, Modal, Typography, Container } from '@mui/material'
 import AddIcon from '@mui/icons-material/Add';
 import RoomCard from './RoomCard/RoomCard';
 import AddRoomComponent from '../AddRoomComponent/AddRoomComponent';
@@ -61,6 +61,7 @@ export default function SensorHomePage({ supabase, userId }) {
         setOpenSnackBar(true);
         fetchRooms();
 
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
     const setAddRoomAlerState = useCallback((val) => {
@@ -68,6 +69,8 @@ export default function SensorHomePage({ supabase, userId }) {
         setAddRoomStatus(val);
         setOpenSnackBar(true);
         fetchRooms();
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
     const setDeleteAlerState = useCallback((val) => {
@@ -75,6 +78,8 @@ export default function SensorHomePage({ supabase, userId }) {
         setDeleteRoomStatus(val);
         setOpenSnackBar(true);
         fetchRooms();
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
     const setAddSensorAlerState = useCallback((val) => {
@@ -82,6 +87,8 @@ export default function SensorHomePage({ supabase, userId }) {
         setAddSensorStatus(val);
         setOpenSnackBar(true);
         fetchRooms();
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
     const setSnackBarOpen = useCallback((value) => {
@@ -98,6 +105,8 @@ export default function SensorHomePage({ supabase, userId }) {
             }
         }
         fetchData();
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [Rooms,preRender]);
 
     return (

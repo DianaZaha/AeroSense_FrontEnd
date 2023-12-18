@@ -10,7 +10,6 @@ import { RoutinesPage } from './Deni/RoutinesPage/RoutinesPage';
 import SensorHomePage from './Diana/SensorHomePage/SensorHomePage';
 import StatisticsPageComponent from './Blue/StatisticsPageComponent/StatisticsPageComponent';
 import LoginPage from './Crista/components/UserLoginPage';
-import PremiumPage from './Deni/PremiumPage';
 import AccountHomePage from './Maria/AccountHomePage/AccountHomePage';
 
 const mdTheme = createTheme();

@@ -43,6 +43,7 @@ export default function RoomCard({ supabase, Name, Description, UserID, RoomId, 
   }
   const getSensorList = useCallback(() => {
     fetchMachines();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   if (preRender === 0) {
@@ -53,11 +54,13 @@ export default function RoomCard({ supabase, Name, Description, UserID, RoomId, 
   const setDelSensAl = useCallback((val)=>{
     fetchMachines();
     setDeleteSensorAlerState(val);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const setAddSensorAlerStateRoomCard = useCallback((val) => {
     fetchMachines();
     setAddSensorAlerState(val);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
 }, []);
 
   return (
