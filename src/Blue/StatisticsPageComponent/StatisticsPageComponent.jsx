@@ -7,7 +7,7 @@ export default function StatisticsPageComponent({ supabase, userId }) {
   const [sensorId, setSensorId] = useState('');
   const [sensorList, setSensorList] = useState([]);
   const [measurementTypes, setMeasurementTypes] = useState([]);
-  const [preRender, setPrerender] = useState(0);
+  const [, setPrerender] = useState(0);
   let list = [];
   list.push({ id: 1, name: "Light" });
   list.push({ id: 2, name: "Sound" });
@@ -42,6 +42,7 @@ export default function StatisticsPageComponent({ supabase, userId }) {
     }
     fetchMachines();
   }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     , [sensorList]);
 
 

@@ -53,6 +53,7 @@ export default function ChartComponent({ supabase, measurement, sensorId, }) {
         setData(null);
         let transformedData = [];
         let count = 1;
+        // eslint-disable-next-line array-callback-return
         Readings.map(item => {
           transformedData.push({
             value: item.value,
@@ -75,6 +76,7 @@ export default function ChartComponent({ supabase, measurement, sensorId, }) {
     };
 
     fetchData();
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [data, preRender, ReadingList]);
 
   if (data === null || data.length === 0) {

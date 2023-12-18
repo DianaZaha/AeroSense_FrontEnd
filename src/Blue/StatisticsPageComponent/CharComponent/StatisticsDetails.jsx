@@ -28,6 +28,7 @@ export default function StatisticsDetails({sensorId, MeasurementName, ReadingLis
     if(preRender === 0){
     let list = [];
     let count = 1;
+    // eslint-disable-next-line array-callback-return
     ReadingList.map(element=> {
         list.push({
             id: count, 
