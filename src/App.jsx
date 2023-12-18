@@ -31,8 +31,10 @@ function App() {
     const authed = localStorage.getItem('role');
     if(authed)
       return children;
-    else
+    else{
+      console.log('redirect');
       return <Navigate to={"/home"}/>
+    }
   }
 
   const PrivateRouteNotLogged = ({ children }) => {
