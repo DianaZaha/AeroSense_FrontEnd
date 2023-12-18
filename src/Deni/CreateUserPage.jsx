@@ -15,6 +15,7 @@ import Stack from '@mui/material/Stack';
 import Modal from '@mui/material/Modal';
 import { Collapse, Alert } from '@mui/material';
 import PremiumPage from './PremiumPage';
+import { useNavigate } from 'react-router-dom';
 
 const style = {
   position: 'absolute',
@@ -31,6 +32,7 @@ const style = {
 const defaultTheme = createTheme();
 
 export default function CreateUserPage({supabase}) {
+  const navigate = useNavigate();
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => {
     setOpen(true);
@@ -71,6 +73,7 @@ export default function CreateUserPage({supabase}) {
 
     localStorage.setItem('role', data[0].admin);
     localStorage.setItem('userId', data[0].id_user);
+    navigate("/");
     window.location.reload(false);
   };
 

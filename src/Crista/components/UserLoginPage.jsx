@@ -13,7 +13,7 @@ import Typography from '@mui/material/Typography';
 import { Collapse, Alert, Modal } from '@mui/material';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
-import { Link as RouterLink } from 'react-router-dom';
+import { Link as RouterLink, useNavigate } from 'react-router-dom';
 
 
 function Copyright(props) {
@@ -44,6 +44,7 @@ const style = {
 const defaultTheme = createTheme();
 
 export default function SignInSide({supabase}) {
+  const navigate = useNavigate();
   const handleSubmit = async (event) => {
     event.preventDefault();
     const formData = new FormData(event.currentTarget);
@@ -62,6 +63,8 @@ export default function SignInSide({supabase}) {
 
     localStorage.setItem('role', data[0].admin);
     localStorage.setItem('userId', data[0].id_user);
+
+    navigate("/");
     window.location.reload(false);
   };
 
