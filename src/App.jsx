@@ -1,6 +1,5 @@
 import React from 'react';
 import { createClient } from '@supabase/supabase-js'
-import HomePage from './HomePageComponent/HomePage';
 import CreateUserPage from './Deni/CreateUserPage'
 import { Routes, Route, Navigate } from 'react-router-dom';
 import { Container, createTheme} from '@mui/material'
@@ -10,8 +9,9 @@ import { RoutinesPage } from './Deni/RoutinesPage/RoutinesPage';
 import SensorHomePage from './Diana/SensorHomePage/SensorHomePage';
 import StatisticsPageComponent from './Blue/StatisticsPageComponent/StatisticsPageComponent';
 import LoginPage from './Crista/components/UserLoginPage';
-import PremiumPage from './Deni/PremiumPage';
+import FrontPage from './Blue/FrontPage/FrontPage';
 import AccountHomePage from './Maria/AccountHomePage/AccountHomePage';
+import Footer from './Teo/FooterComponent/Footer';
 
 const mdTheme = createTheme();
 
@@ -44,19 +44,21 @@ function App() {
 
   return (
     <ThemeProvider theme={mdTheme}>
-        <SideBarComponent>
+      <SideBarComponent>
           <Container maxWidth='xl'>
             <Routes>
-              <Route exact={true} path="/" element={<HomePage/>}/>
+              <Route exact={true} path="/" element={<FrontPage />}/>
               <Route exact={true} path="/login" element ={<PrivateRouteNotLogged><LoginPage supabase={supabase}/></PrivateRouteNotLogged>}/>
               <Route exact={true} path="/create-user" element={<PrivateRouteNotLogged><CreateUserPage supabase={supabase}/></PrivateRouteNotLogged>}/>
               <Route exact={true} path="/sensors" element={<PrivateRouteLogged><SensorHomePage supabase={supabase}/></PrivateRouteLogged>}/>
               <Route exact={true} path='/routines' element={<PrivateRouteLogged><RoutinesPage supabase={supabase} userId={1}/></PrivateRouteLogged>}/>
               <Route exact={true} path='/account' element={<PrivateRouteLogged><AccountHomePage/></PrivateRouteLogged>}/>
-              <Route exact={true} path="/statistics" element={<PrivateRouteAdmin><StatisticsPageComponent/></PrivateRouteAdmin>}/>
+              <Route exact={true} path="/statistics" element={<PrivateRouteAdmin><StatisticsPageComponent supabase={supabase} userId={1}/></PrivateRouteAdmin>}/>
             </Routes>
-          </Container>
-        </SideBarComponent> 
+            <Footer/>
+            </Container>
+            </SideBarComponent>
+            
     </ThemeProvider>
   )
 }
