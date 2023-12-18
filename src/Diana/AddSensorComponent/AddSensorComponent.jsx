@@ -1,5 +1,5 @@
 import React, { useState, useCallback } from 'react'
-import { Box, FormControl, InputLabel, Select, Button, MenuItem, Fab } from '@mui/material';
+import { Box, FormControl, InputLabel, Select, MenuItem, Fab } from '@mui/material';
 import AddLinkIcon from '@mui/icons-material/AddLink';
 import AddIcon from '@mui/icons-material/Add';
 
@@ -24,6 +24,7 @@ export default function AddSensorComponent({ UserID, RoomID, supabase, onClose, 
 
   const getSensorList = useCallback(() => {
     fetchUnallocatedSensors();
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   if (prerender === 0) {
@@ -43,6 +44,7 @@ export default function AddSensorComponent({ UserID, RoomID, supabase, onClose, 
   }
 
   const postData = async (idSensor, idRoom) => {
+    // eslint-disable-next-line no-unused-vars
     const { data, error } = await supabase.from('sensor').update({ id_room: idRoom}).eq('id_sensor', idSensor).single();
     console.log(error);
     if (error != null) {

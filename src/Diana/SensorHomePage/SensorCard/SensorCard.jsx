@@ -7,7 +7,6 @@ import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import SensorsIcon from '@mui/icons-material/Sensors';
 import Modal from '@mui/material/Modal';
-import DeleteIcon from '@mui/icons-material/Delete';
 import SensorDetailsComponent from '../../SensorDetailsComponent/SensorDetailsComponent';
 
 export default function SensorCard({ Name, Id, supabase, setDeleteSensorAlerState}) {

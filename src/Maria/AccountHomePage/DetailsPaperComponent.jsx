@@ -5,8 +5,6 @@ import ListItem from '@mui/material/ListItem';
 import ListItemText from '@mui/material/ListItemText';
 import styled from '@emotion/styled';
 import Paper from '@mui/material/Paper';
-import Container from '@mui/material/Container';
-import Box from '@mui/material/Box';
 
 const DetailsPaper = styled(Paper)(({ theme }) => ({
   width: 800,

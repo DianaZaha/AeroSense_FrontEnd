@@ -1,5 +1,5 @@
-import { Box, Typography } from '@mui/material'
-import React, { useState } from 'react'
+import { Box } from '@mui/material'
+import React from 'react'
 import { BarChart } from '@mui/x-charts/BarChart';
 import { axisClasses } from '@mui/x-charts';
 

@@ -6,7 +6,6 @@ import BrainPNG from './images/brain-icon.png';
 import LeftLeaf from './images/painted-leaf-l.png';
 import RightLeaf from './images/painted-leaf-r.png';
 import UserIcon from './images/user-icon.png';
-import DownArrow from './images/down-arrow.png';
 import LeavesLogo from './images/green-leaves-logo-1.png';
 import PeopleIcon from './images/people-3.png';
 import Diagram from './images/pngwing-2.png';
