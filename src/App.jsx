@@ -24,7 +24,7 @@ function App() {
     if(authed)
       return children;
     else
-      return <Navigate to={"/"}/>
+      return <Navigate to={"/home"}/>
   }
 
   const PrivateRouteLogged = ({ children }) => {
@@ -32,7 +32,7 @@ function App() {
     if(authed)
       return children;
     else
-      return <Navigate to={"/"}/>
+      return <Navigate to={"/home"}/>
   }
 
   const PrivateRouteNotLogged = ({ children }) => {
@@ -40,7 +40,7 @@ function App() {
     if(!authed)
       return children;
     else
-      return <Navigate to={"/"}/>
+      return <Navigate to={"/home"}/>
   }
 
   return (
