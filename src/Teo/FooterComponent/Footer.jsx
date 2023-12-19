@@ -32,12 +32,12 @@ export default function ContactUs () {
 
   return (
     <>
-      <Box>
-        <Button color="primary" onClick={handleOpenDialog}>
+      <Box  sx={{ mt: 2 }}>
+        <Button  sx={{ color: '#143E2F'}} onClick={handleOpenDialog}>
           Need Help?
         </Button>
         <Link to="/">
-        <Button color="primary">
+        <Button sx={{ color: '#143E2F' }}>
           About Us
         </Button>
         </Link>
@@ -48,18 +48,18 @@ export default function ContactUs () {
         <DialogTitle>Contact Us</DialogTitle>
         <DialogContent>
           <form ref={form} onSubmit={sendEmail}>
-            <TextField
+            <TextField sx={{ mt: 2 }}
               label="Your Name"
               fullWidth
               name="user_name"
             />
-            <TextField
+            <TextField sx={{ mt: 2 }}
               label="Your Email"
               fullWidth
               type="email"
               name="user_email"
             />
-            <TextField
+            <TextField sx={{ mt: 2 }}
               label="Your Message"
               multiline
               fullWidth
@@ -81,7 +81,7 @@ export default function ContactUs () {
 
       <Box mt={2}>
         <Typography variant="body2">
-          &copy; 2023 Your Company. All rights reserved.
+          &copy; 2023 AeroSense. All rights reserved.
         </Typography>
       </Box>
     </>
