@@ -9,7 +9,7 @@ export default function PageDetailsStats () {
         <Grid item xs={10} sm={5}>
         <Box sx={{ display: 'flex', flexWrap: 'wrap', justifyContent: "center", flexDirection: 'column', p: 1, m: 1, }}>
           <Typography variant="h4" mt={4} mb={2}>
-          MEASURE THE HEALTH OF YOUR SURROUNDINGS IN REAL TIME
+            GAUGE THE VITALITY OF YOUR SPACE IN REAL TIME.
           </Typography>
           <Typography variant="body1" mt={2} mb={2}>
           We will notify you each time one of our sensors detect a drop in your quality of life. All you have to do is keep an eye out for our tips!
