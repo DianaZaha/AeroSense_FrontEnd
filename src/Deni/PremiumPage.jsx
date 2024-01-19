@@ -51,6 +51,10 @@ export default function PremiumPage() {
                  <Checkbox {...label} disabled checked />
                  You have access to statistical data in CSV format
                  </Typography>
+                 <Typography> 
+                 <Checkbox {...label} disabled checked />
+                 You receive premium sensor maintanance 
+                 </Typography>
             </CardContent>
         </Card>
         

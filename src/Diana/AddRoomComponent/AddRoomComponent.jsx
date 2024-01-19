@@ -29,7 +29,7 @@ export default function AddRoomComponent({ supabase, UserID , onClose, setAddRoo
         const { data: machine_group, error1 } = await supabase.from('room').select('name').eq('name', RoomName);
         if(machine_group.length === 0){
         // eslint-disable-next-line no-unused-vars
-        let { data, error } = await supabase.from('room').insert({id_room: id , id_user:  UserID , description:  RoomDescription , name:  RoomName }).single();
+        let { data, error } = await supabase.from('room').insert({ id_user:  UserID , description:  RoomDescription , name:  RoomName }).single();
             if(error != null)
             setAddRoomAlerState('error-database');
             else

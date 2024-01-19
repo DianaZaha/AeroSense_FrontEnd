@@ -34,7 +34,7 @@ export default function RoomDetailsComponent({ supabase, RoomId, RoomName, RoomD
                 <GridToolbarColumnsButton />
                 <GridToolbarFilterButton />
                 <GridToolbarDensitySelector />
-                <GridToolbarExport csvOptions={{ fileName: "Sensor List" }} />
+                <GridToolbarExport csvOptions={{ fileName: "Room " + RoomId+ " " + RoomName +" Sensor List" }} />
                 <Button onClick={handleRemoveSensors} size='small'><DeleteIcon /> Remove Sensors</Button>
             </GridToolbarContainer>
         );
