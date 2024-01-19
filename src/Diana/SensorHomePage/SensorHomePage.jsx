@@ -107,7 +107,7 @@ export default function SensorHomePage({ supabase, userId }) {
         fetchData();
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [Rooms,preRender]);
+    }, [preRender]);
 
     return (
         <Box sx={{ padding: '2%', width: '100%' }}>

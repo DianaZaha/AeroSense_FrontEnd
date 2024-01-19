@@ -8,15 +8,18 @@ import Typography from '@mui/material/Typography';
 import SensorsIcon from '@mui/icons-material/Sensors';
 import Modal from '@mui/material/Modal';
 import SensorDetailsComponent from '../../SensorDetailsComponent/SensorDetailsComponent';
+import useScreenSize from '../../../useScreenSize';
 
-export default function SensorCard({ Name, Id, supabase, setDeleteSensorAlerState}) {
+export default function SensorCard({ Name, Id, supabase, setDeleteSensorAlerState }) {
+
+  const screenWidth = useScreenSize().width;
 
   const [open, setOpen] = useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
 
   const style = {
-    position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%, -50%)', width: '50%',
+    position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%, -50%)', width: (screenWidth * 80) / 100,
     bgcolor: 'background.paper', boxShadow: 24, p: 4,
   };
 
@@ -31,16 +34,17 @@ export default function SensorCard({ Name, Id, supabase, setDeleteSensorAlerStat
       </CardContent>
       <CardActions>
         <Button size="small" onClick={handleOpen}>Sensor Details</Button>
-        <Modal
-          open={open}
-          onClose={handleClose}
-          aria-labelledby="modal-modal-title"
-          aria-describedby="modal-modal-description"
-        >
-           <Box sx={style}>
-           <SensorDetailsComponent SensorName={Name} ID={Id} supabase={supabase} onClose={handleClose} setDeleteSensorAlerState={setDeleteSensorAlerState}/>
-          </Box>
-        </Modal>
+          <Modal
+            open={open}
+            onClose={handleClose}
+            aria-labelledby="modal-modal-title"
+            aria-describedby="modal-modal-description"
+          >
+            <Box sx={style}>
+
+              <SensorDetailsComponent SensorName={Name} ID={Id} supabase={supabase} onClose={handleClose} setDeleteSensorAlerState={setDeleteSensorAlerState} />
+            </Box>
+          </Modal>
       </CardActions>
     </Card>
   );

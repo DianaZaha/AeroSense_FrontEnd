@@ -46,6 +46,7 @@ export default function ContactUs () {
       {/* Pop-up Dialog */}
       <Dialog open={openDialog} onClose={handleCloseDialog}>
         <DialogTitle>Contact Us</DialogTitle>
+        <Typography  sx={{ mr: 3, ml: 3 }}>Fill out this form with your information and we contact you back via email to assist you in short time!</Typography>
         <DialogContent>
           <form ref={form} onSubmit={sendEmail}>
             <TextField sx={{ mt: 2 }}

@@ -5,6 +5,7 @@ import MenuOpenIcon from '@mui/icons-material/MenuOpen';
 import RoomDetailsComponent from '../../RoomDetailsComponent/RoomDetailsComponent';
 import AddSensorComponent from '../../AddSensorComponent/AddSensorComponent';
 import SensorCard from '../SensorCard/SensorCard';
+import useScreenSize from '../../../useScreenSize';
 
 export default function RoomCard({ supabase, Name, Description, UserID, RoomId, setAddSensorAlerState, setDeleteAlerState, setDeleteSensorAlerState, fetchRooms }) {
   const [sensorList, setSensorList] = useState([]);
@@ -18,14 +19,10 @@ export default function RoomCard({ supabase, Name, Description, UserID, RoomId, 
   const handleOpenNewSensor = () => setAddSensorOpen(true);
   const handleCloseNewSensor = () => setAddSensorOpen(false);
 
+  const screenWidth = useScreenSize().width;
 
   const style = {
-    position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%, -50%)', width: '50%',
-    bgcolor: 'background.paper', boxShadow: 24, p: 4,
-  };
-
-  const style1 = {
-    position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%, -50%)', width: '30%',
+    position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%, -50%)', width: (screenWidth*80)/100,
     bgcolor: 'background.paper', boxShadow: 24, p: 4,
   };
 
@@ -93,7 +90,7 @@ export default function RoomCard({ supabase, Name, Description, UserID, RoomId, 
       </CardContent>
       <CardActions>
       <Modal open={addSensorOpen} onClose={handleCloseNewSensor} >
-                <Box sx={style1}>
+                <Box sx={style}>
                     <AddSensorComponent UserID={UserID} RoomID={RoomId} supabase={supabase} 
                     onClose={handleCloseNewSensor} setAddSensorAlerState={setAddSensorAlerStateRoomCard} />
                 </Box>

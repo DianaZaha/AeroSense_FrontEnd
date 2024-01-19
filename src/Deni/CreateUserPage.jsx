@@ -90,6 +90,11 @@ export default function CreateUserPage({supabase}) {
   const handleOpenModal = () => setOpenModal(true);
   const handleCloseModal = () => setOpenModal(false);
 
+  const [checked, setChecked] = React.useState(false);
+
+  const handleGOPRemium = () => {
+    setChecked(!checked);
+  }
   return (
     <ThemeProvider theme={defaultTheme}>
       <Container component="main" maxWidth="xs">
@@ -159,11 +164,11 @@ export default function CreateUserPage({supabase}) {
             />
 
             <Stack direction='row'>
-            <FormControlLabel control={<Checkbox default />} name="admin" id="admin" label="Go PREMIUM!" />         
-            <Button variant="outlined" onClick={handleOpen}>See details</Button>
-            
+            <FormControlLabel control={<Checkbox default />} onChange={handleGOPRemium}name="admin" id="admin" label="Go PREMIUM!" />         
+            <Button variant="outlined" onClick={handleOpen}> details</Button>
             </Stack>
         
+            {checked === true && <Typography variant="caption" display="block" >*when clicking on create you will be redirected to our payment payment processor</Typography>}
             <Grid container>
                 <Button
                 type="submit"

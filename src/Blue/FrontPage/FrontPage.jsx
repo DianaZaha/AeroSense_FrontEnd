@@ -5,6 +5,7 @@ import PageDetails from "./PageDetails.jsx";
 import PageDetailsSensors from "./PageDetailsSensors.jsx";
 import PageDetailsStats from "./PageDetailsStats.jsx";
 import GoPremiumCard from './GoPremiumCard.jsx';
+import BuySensors from './PageBuySensors.jsx';
 
 export default function FrontPage() {
   return (
@@ -21,33 +22,14 @@ export default function FrontPage() {
               Care for your environment. Care for yourself
             </Typography>
             </Box>
-            
           </Grid>
         </Grid>
       </Paper>
-      {/* <Background>
-      <div className = {classes.root}>
-        <Grow in = {checked} {...(checked ? { timeout: 1000 } : {})} collapsedHeight ={15}>
-        <div className={classes.container}>
-          <div>
-            <h1 className = {classes.title}>
-              AeroSense
-            </h1>
-            <h5 className = {classes.subtitle}>
-              Care for your environment. Care for yourself
-            </h5>  
-          </div>
-        </div>
-        </Grow>    
-      </div> */}
-      {/*       
-    </Background> */}
-
       <PageDetails />
       <PageDetailsSensors />
       <PageDetailsStats />
       <GoPremiumCard />
-
+      <BuySensors />
     </>
   );
 };
